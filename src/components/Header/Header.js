@@ -102,7 +102,9 @@ const Header = () => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             >
-              <img style={{ width: "100px" }} src={logo} alt="" />
+              <Link to="/">
+                  <img style={{ width: "100px" }} src={logo} alt="" />
+              </Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: 'flex-end'} }}>
               <Link

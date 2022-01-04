@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -10,16 +10,18 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Link } from "react-router-dom";
 import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AddProduct from '../AddProduct/AddProduct';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFolderPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react';
+import ManageProduct from '../ManageProduct/ManageProduct';
+import EditProduct from '../EditProduct/EditProduct';
+import CloseIcon from '@mui/icons-material/Close';
+import icon from "../../images/mateGadges 1.png"
 
 const drawerWidth = 240;
 
@@ -49,7 +51,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -89,21 +90,43 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Admin() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const initialState = {manageProduct: true, addProduct: false, editProduct: false}
+  const [selectedComponent, setSelectedComponent] = useState(initialState);
+  // console.log(selectedComponent)
+
+  const handleDrawer = () => {
+    setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
-  const linkStyle = {
-    textDecoration:"none",
-    fontWeight:"700",
-    color:"black"
+  const handleChangeComponent = (componentName) =>{
+    if(componentName === "manageProduct"){
+      const showComponent = {...selectedComponent}
+      showComponent.manageProduct = true;
+      showComponent.addProduct = false;
+      showComponent.editProduct = false;
+      setSelectedComponent(showComponent)
+    }
+
+    if(componentName === "addProduct"){
+      console.log("object")
+      const showComponent = {...selectedComponent}
+      showComponent.addProduct = true;
+      showComponent.manageProduct = false;
+      showComponent.editProduct = false;
+      setSelectedComponent(showComponent)
+    }
+
+    if(componentName === "editProduct"){
+      const showComponent = {...selectedComponent}
+      showComponent.editProduct = true;
+      showComponent.manageProduct = false;
+      showComponent.addProduct = false;
+      setSelectedComponent(showComponent)
+    }
+    
   }
 
   return (
@@ -114,14 +137,13 @@ export default function Admin() {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={handleDrawer}
             edge="start"
             sx={{
               marginRight: '36px',
-              ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            {open ? <CloseIcon/> : <MenuIcon />}
           </IconButton>
           <Typography variant="h4" noWrap component="div">
             Mini variant drawer
@@ -130,47 +152,39 @@ export default function Admin() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            <p>close</p>
-          </IconButton>
+          <img style={{width:"120px"}} src={icon} alt="" />
         </DrawerHeader>
         <Divider />
         <List>
-            <Link style={linkStyle} to="/manageProduct" >
-                <ListItem button >
+                <ListItem button onClick={() =>handleChangeComponent("manageProduct")}>
                 <ListItemIcon>
                 <AppRegistrationSharpIcon/>
                 </ListItemIcon>
                 <ListItemText primary={"Manage Products"} />
                 </ListItem>
-            </Link>
-            <Link style={linkStyle} to="/addProduct" >
-                <ListItem button >
+                <ListItem button onClick={() =>handleChangeComponent("addProduct")}>
                 <ListItemIcon>
-                <AddIcon/>
+                <FontAwesomeIcon icon={faFolderPlus} />
                 </ListItemIcon>
                 <ListItemText primary={"Add Product"} />
                 </ListItem>
-            </Link>
-            <Link style={linkStyle} to="/editProduct" >
-                <ListItem button >
+            
+                <ListItem button onClick={() =>handleChangeComponent("editProduct")}>
                 <ListItemIcon>
-                <EditIcon/>
+                <FontAwesomeIcon icon={faEdit} />
                 </ListItemIcon>
                 <ListItemText primary={"Edit Product"} />
                 </ListItem>
-            </Link>
         </List>
         <Divider />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-          adfs
-        </Typography>
-        <AddProduct/>
+        {selectedComponent.manageProduct && <ManageProduct/>}
+        {selectedComponent.addProduct && <AddProduct/>}
+        {selectedComponent.editProduct && <EditProduct/>}
       </Box>
     </Box>
   );
 }
+

@@ -14,7 +14,7 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/orders" element={<Login />} />
-        <Route path="/addProduct" element={<AddProduct />} />
+        {/* <Route path="/addProduct" element={<AddProduct />} /> */}
         <Route path="/*" element={<NotMatch />} />
         </Routes>
     </div>

@@ -5,7 +5,7 @@ const Orders = () => {
     return (
         <div>
             <Header/>
-            <h2>this is Orders</h2>
+            <h2>this is Ordersds</h2>
         </div>
     );
 };
