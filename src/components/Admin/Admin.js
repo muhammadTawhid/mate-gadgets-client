@@ -22,6 +22,9 @@ import ManageProduct from '../ManageProduct/ManageProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import CloseIcon from '@mui/icons-material/Close';
 import icon from "../../images/mateGadges 1.png"
+import HomeIcon from '@mui/icons-material/Home';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -94,7 +97,8 @@ export default function Admin() {
 
   const initialState = {manageProduct: true, addProduct: false, editProduct: false}
   const [selectedComponent, setSelectedComponent] = useState(initialState);
-  // console.log(selectedComponent)
+  const [editProductId, setEditProductId] = useState({});
+  console.log(editProductId , "editing id")
 
   const handleDrawer = () => {
     setOpen(!open);
@@ -128,11 +132,12 @@ export default function Admin() {
     }
     
   }
+  // console.log(windows.location.pathname);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="success">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -146,7 +151,9 @@ export default function Admin() {
             {open ? <CloseIcon/> : <MenuIcon />}
           </IconButton>
           <Typography variant="h4" noWrap component="div">
-            Mini variant drawer
+            {selectedComponent.manageProduct && "Manage Product"}
+            {selectedComponent.addProduct && "Add Product"}
+            {selectedComponent.editProduct && "Edit Product"}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -156,12 +163,13 @@ export default function Admin() {
         </DrawerHeader>
         <Divider />
         <List>
-                <ListItem button onClick={() =>handleChangeComponent("manageProduct")}>
-                <ListItemIcon>
-                <AppRegistrationSharpIcon/>
-                </ListItemIcon>
-                <ListItemText primary={"Manage Products"} />
-                </ListItem>
+                  <ListItem button onClick={() =>handleChangeComponent("manageProduct")}>
+                  <ListItemIcon>
+                  <AppRegistrationSharpIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary={"Manage Products"} />
+                  </ListItem>
+
                 <ListItem button onClick={() =>handleChangeComponent("addProduct")}>
                 <ListItemIcon>
                 <FontAwesomeIcon icon={faFolderPlus} />
@@ -177,12 +185,15 @@ export default function Admin() {
                 </ListItem>
         </List>
         <Divider />
+        <Link to="/" > 
+            <Button color="success" className="w-100" variant="outlined"><HomeIcon/>{open &&  "Back to Home"}</Button>
+        </Link>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {selectedComponent.manageProduct && <ManageProduct/>}
+        {selectedComponent.manageProduct && <ManageProduct setEditProductId={setEditProductId} selectedComponent={selectedComponent} setSelectedComponent={setSelectedComponent} />}
         {selectedComponent.addProduct && <AddProduct/>}
-        {selectedComponent.editProduct && <EditProduct/>}
+        {selectedComponent.editProduct && <EditProduct editProductId={editProductId} setProductId={setEditProductId}/>}
       </Box>
     </Box>
   );

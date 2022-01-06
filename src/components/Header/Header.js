@@ -12,7 +12,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../images/mateGadges.png";
 import { Link } from "react-router-dom";
-// import Link from '@mui/material/Link';
 
 const Header = () => {
 

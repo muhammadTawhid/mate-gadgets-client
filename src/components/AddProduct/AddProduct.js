@@ -6,16 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
 
 const AddProduct = () => {
-  // const initialState = {name:"", price:"", quantity:"", img:""}
   const [productImg, setProductImg] = useState(null);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    // const newProduct = {...product};
-    // newProduct.name = data.name;
-    // newProduct.price = data.price;
-    // newProduct.quantity = data.quantity;
-    // setProduct(newProduct)
     const newProduct = {
       name: data.name,
       price: data.price,

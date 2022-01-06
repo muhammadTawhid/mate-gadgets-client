@@ -4,7 +4,6 @@ import Home from './components/Home/Home';
 import Orders from './components/Orders/Orders';
 import Login from './components/Login/Login';
 import NotMatch from './components/NotMatch/NotMatch';
-import AddProduct from './components/AddProduct/AddProduct';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/orders" element={<Login />} />
-        {/* <Route path="/addProduct" element={<AddProduct />} /> */}
         <Route path="/*" element={<NotMatch />} />
         </Routes>
     </div>
