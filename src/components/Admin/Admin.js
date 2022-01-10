@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -17,7 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import AddProduct from '../AddProduct/AddProduct';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import ManageProduct from '../ManageProduct/ManageProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import CloseIcon from '@mui/icons-material/Close';
@@ -92,14 +92,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+export const MyContext = createContext();
+
 export default function Admin() {
   const [open, setOpen] = useState(true);
 
   const initialState = {manageProduct: true, addProduct: false, editProduct: false}
   const [selectedComponent, setSelectedComponent] = useState(initialState);
-  const [editProductId, setEditProductId] = useState({});
-  console.log(editProductId , "editing id")
-
+  const [editProductId, setEditProductId] = useState();
+  const [successMessage, setSuccessMessage] = useState(true)
+  console.log(selectedComponent)
   const handleDrawer = () => {
     setOpen(!open);
   };
@@ -112,6 +114,7 @@ export default function Admin() {
       showComponent.addProduct = false;
       showComponent.editProduct = false;
       setSelectedComponent(showComponent)
+      setSuccessMessage(false)
     }
 
     if(componentName === "addProduct"){
@@ -121,6 +124,7 @@ export default function Admin() {
       showComponent.manageProduct = false;
       showComponent.editProduct = false;
       setSelectedComponent(showComponent)
+      setSuccessMessage(false)
     }
 
     if(componentName === "editProduct"){
@@ -129,10 +133,10 @@ export default function Admin() {
       showComponent.manageProduct = false;
       showComponent.addProduct = false;
       setSelectedComponent(showComponent)
+      setSuccessMessage(false)
     }
     
   }
-  // console.log(windows.location.pathname);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -190,10 +194,12 @@ export default function Admin() {
         </Link>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {selectedComponent.manageProduct && <ManageProduct setEditProductId={setEditProductId} selectedComponent={selectedComponent} setSelectedComponent={setSelectedComponent} />}
-        {selectedComponent.addProduct && <AddProduct/>}
-        {selectedComponent.editProduct && <EditProduct editProductId={editProductId} setProductId={setEditProductId}/>}
+        <MyContext.Provider value={{editProductId, setEditProductId, selectedComponent, setSelectedComponent, successMessage, setSuccessMessage}}>
+          <DrawerHeader />
+            {selectedComponent.manageProduct && <ManageProduct/>}
+            {selectedComponent.addProduct && <AddProduct/>}
+            {selectedComponent.editProduct && <EditProduct/>}
+        </MyContext.Provider>
       </Box>
     </Box>
   );

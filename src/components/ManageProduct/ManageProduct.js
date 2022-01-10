@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./ManageProduct.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { MyContext } from '../Admin/Admin';
 
-const ManageProduct = (props) => {
-    const { setEditProductId, selectedComponent, setSelectedComponent} = props;
+const ManageProduct = () => {
+    const {setEditProductId, setSuccessMessage,  selectedComponent, setSelectedComponent} = useContext(MyContext)
     console.log(selectedComponent)
 
     const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const ManageProduct = (props) => {
       showComponent.addProduct = false;
       setSelectedComponent(showComponent)
       setEditProductId(id)
-      console.log(id)
+      setSuccessMessage(false)
     }
 
     const handleDeleteProduct = id =>{
@@ -32,10 +33,10 @@ const ManageProduct = (props) => {
     }
     
     return (
-        <table className="table table-hover">
+        <table className="table table-hover mt-3">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">{selectedComponent.editProduct ? "Product" : "No."}</th>
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Price</th>
@@ -45,11 +46,15 @@ const ManageProduct = (props) => {
         <tbody>
         { products.map((product, index) => ( 
                          <tr key={product._id}>
-                     <th scope="row" >{index + 1}</th>
+                           { selectedComponent.editProduct ? (<th><img className="w-25" src={product.img} alt="" /></th>) : <th scope="row" >{index + 1}</th> }
+                     
                      <td>{product.name}</td>
                      <td>{product.category}</td>
                      <td>${product.price}</td>
-                     <td><button onClick={() => handleEditProduct(product._id)} className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></button> <button  className="trash-icon" onClick={() => handleDeleteProduct(product._id)}><FontAwesomeIcon icon={faTrashAlt} /></button>
+                     <td>
+                       <div className="d-flex">
+                       <button onClick={() => handleEditProduct(product._id)} className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></button> <button  className="trash-icon" onClick={() => handleDeleteProduct(product._id)}><FontAwesomeIcon icon={faTrashAlt} /></button>
+                       </div>
                      </td>
                    </tr>
         ))}

@@ -1,22 +1,27 @@
 import "./EditProduct.css"
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
+import ManageProduct from "../ManageProduct/ManageProduct";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
+import { MyContext } from "../Admin/Admin";
 
 const EditProduct = (props) => {
-  const {editProductId, setEditProductId} = props;
+  const {editProductId, successMessage, setSuccessMessage} = useContext(MyContext);
   const [editProduct, setEditProduct] = useState({});
-  console.log(editProduct, "get product");
+  console.log(editProductId, "get product");
   const [productImg, setProductImg] = useState(null);
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    fetch("http://localhost:5000/productById/" + editProductId)
-    .then(res => res.json())
-    .then(data => setEditProduct(data))
-  }, [])
+    if(editProductId ){
+      fetch("http://localhost:5000/productById/" + editProductId)
+      .then(res => res.json())
+      .then(data => setEditProduct(data))
+    }
+  }, [editProductId])
 
   const onSubmit = (data) => {
     const newProduct = {
@@ -34,7 +39,12 @@ const EditProduct = (props) => {
       },
       body: JSON.stringify(newProduct)
     })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => {
+      if(data){
+        setSuccessMessage(true)
+      }
+    })
   };
 
   const uploadImg = (e) => {
@@ -43,15 +53,21 @@ const EditProduct = (props) => {
     newImgData.set("key", "be8a4cc0a70c10d0afc35bcd7b9def3d");
     newImgData.append("image", e.target.files[0]);
 
-    axios.post("https://api.imgbb.com/1/upload", newImgData).then((res) => {
+    axios.post("https://api.imgbb.com/1/upload", newImgData)
+    .then((res) => {
       setProductImg(res.data.data.display_url);
       console.log(res.data.data.display_url);
     });
   };
 
+
   
     return (
-        <div>
+       <div>
+         {successMessage ? (<SuccessMessage/>) 
+          :
+         editProductId && ( 
+        <div style={{marginBottom: "50px"}}>
             <div className="addProduct-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Edit Product</h2>
@@ -111,8 +127,6 @@ const EditProduct = (props) => {
                 type="file"
                 className="form-control"
                 placeholder="Upload Pic"
-                defaultValue={editProduct.img}
-                
               />
             </div>
           </div>
@@ -122,7 +136,10 @@ const EditProduct = (props) => {
         </button>
       </form>
     </div>
-        </div>
+        </div>)}
+            <ManageProduct/>
+       </div>
+    
     );
 };
 

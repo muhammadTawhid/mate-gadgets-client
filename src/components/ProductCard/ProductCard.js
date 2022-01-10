@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 
 const ProductCard = (props) => {
     const {name, category, price, img} = props.product;
-    
     return (
             
         <div className="col-md-4 d-flex justify-content-center mt-5 align-items-center">

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ProductCard from '../ProductCard/ProductCard';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
+    console.log(products);
     useEffect(() => {
         fetch("http://localhost:5000/products")
         .then(res => res.json())
@@ -47,12 +48,13 @@ const Home = () => {
           )}
         />
       </Stack>
+      {/* <CircularProgress color="success" />  */}
            <div className="row mt-5">
            {
                 products.map(product => <ProductCard product={product} key={product._id}/>)
             }
            </div>
-           
+
         </div>
     );
 };
