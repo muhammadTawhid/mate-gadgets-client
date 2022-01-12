@@ -13,10 +13,11 @@ const EditProduct = (props) => {
   const [editProduct, setEditProduct] = useState({});
   console.log(editProductId, "get product");
   const [productImg, setProductImg] = useState(null);
+  console.log(productImg, "img");
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    if(editProductId ){
+    if(editProductId){
       fetch("http://localhost:5000/productById/" + editProductId)
       .then(res => res.json())
       .then(data => setEditProduct(data))
@@ -28,7 +29,7 @@ const EditProduct = (props) => {
       name: data.name,
       price: data.price,
       category: data.category,
-      img: productImg,
+      img: productImg ? productImg : editProduct.img,
     };
     console.log(newProduct);
 

@@ -6,14 +6,13 @@ import { MyContext } from '../Admin/Admin';
 
 const ManageProduct = () => {
     const {setEditProductId, setSuccessMessage,  selectedComponent, setSelectedComponent} = useContext(MyContext)
-    console.log(selectedComponent)
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
         fetch("http://localhost:5000/products")
         .then(res => res.json())
         .then(data => setProducts(data))
-    }, [])
+    }, [products])
 
     const handleEditProduct = id => {
       const showComponent = {...selectedComponent}
