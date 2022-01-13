@@ -1,15 +1,17 @@
 import "./Login.css"
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Header from '../Header/Header';
-import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash, faMedal } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 import { useForm } from "react-hook-form";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebase.config";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { loginContext } from "../../App";
 
 const Login = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(loginContext);
     const [signUp, setSignUp] = useState(false)
     const [showPass, setShowPass] = useState(false);
     const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm();
@@ -34,15 +36,14 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
                 const user = result.user;
-                console.log(user, "google sign in")
+                const newUser = {...loggedInUser}
+                newUser.name = user.displayName;
+                newUser.email = user.email;
+                newUser.img = user.photoURL;
+                setLoggedInUser(newUser)
             }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log(error);
             });
     }
 
@@ -54,8 +55,7 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user, "sign up success")
-                    data.firstName = ""
-                    data.lastName = ""
+                    updateUserDetails(data)
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -63,6 +63,18 @@ const Login = () => {
                     console.log(errorMessage)
                 });
         }
+    }
+
+    // update user
+    const updateUserDetails = (data) =>{
+        updateProfile(auth.currentUser, {
+        displayName: data.firstName,
+        }).then((result) => {
+            console.log(result);
+        }).catch((error) => {
+        // An error occurred
+        // ...
+        });
     }
 
     // sign in with email and password
@@ -73,6 +85,10 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user, "sign in success")
+                    const newUser = {...loggedInUser}
+                    newUser.name = user.displayName;
+                    newUser.email = user.email;
+                    setLoggedInUser(newUser)
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -110,9 +126,22 @@ const Login = () => {
                                 <div className="col-md-10 ">
                                     {signUp && <div className="form-group">
                                         <input
-                                            {...register("firstName", { required: true })}
+                                            style={errors.firstName && { borderBottom: "1px solid red" }}
+                                            {...register("firstName", {
+                                              required: "This field is required",
+                                              pattern: {
+                                                value: /^[A-Z]/,
+                                                message: "First letter should be uppercase",
+                                              },
+                                              maxLength: {
+                                                value: 20,
+                                                message: "Name contains only 20 characters",
+                                              },
+                                            })}
+                                            onKeyUp={() => trigger("firstName")}
+                                            required
                                             type="text" className="form-control" placeholder="First Name *" />
-                                        {errors.firstName && <small className="err-message">This field is required</small>}
+                                        {errors.firstName && <small className="err-message">{errors.firstName?.message}</small>}
                                     </div>}
                                     {signUp && <div className="form-group">
                                         <input

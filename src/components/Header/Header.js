@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,11 +12,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../images/mateGadges.png";
 import { Link } from "react-router-dom";
+import { loginContext } from "../../App";
 
 const Header = () => {
-
+  const [loggedInUser, setLoggedInUser] = useContext(loginContext)
   const pages = ["Products", "Pricing", "Blog"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElNav, setAnchorElNav] = useState();
   const [anchorElUser, setAnchorElUser] = useState();
 
@@ -27,8 +27,12 @@ const Header = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (param) => {
+    // setAnchorElNav(null);
+    if(param === "signOut"){
+      setLoggedInUser("")
+      setAnchorElNav(null);
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -89,7 +93,7 @@ const Header = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -169,24 +173,10 @@ const Header = () => {
               </Link>
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-            <Link
-              style={linkStyle}
-                sx={{
-                  my: 5,
-                  mr: 10,
-                  fontWeight: "bold",
-                  color: "black",
-                  display: "block",
-                }}
-                to="/login"
-                
-              >
-                Login
-              </Link>
-              <Tooltip title="Open settings">
+            { loggedInUser.email ? (<Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Temy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={loggedInUser.name} src={loggedInUser.img ? loggedInUser.img : loggedInUser.name}/>
                 </IconButton>
               </Tooltip>
               <Menu
@@ -205,13 +195,29 @@ const Header = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem sx={{textAlign:"center"}} onClick={handleCloseNavMenu}>
+                    <Typography >{loggedInUser.name}</Typography>
                   </MenuItem>
-                ))}
+                  <MenuItem sx={{textAlign:"center"}} onClick={() => handleCloseNavMenu("signOut")}>
+                    <Typography>Sign Out</Typography>
+                  </MenuItem>
               </Menu>
-            </Box>
+            </Box>)
+            :
+            (<Link
+              style={linkStyle}
+                sx={{
+                  my: 5,
+                  mr: 10,
+                  fontWeight: "bold",
+                  color: "black",
+                  display: "block",
+                }}
+                to="/login"
+                
+              >
+                Login
+              </Link>)}
           </Toolbar>
         </Container>
       </AppBar>
