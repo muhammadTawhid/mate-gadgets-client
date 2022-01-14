@@ -35,9 +35,9 @@ const Home = () => {
           freeSolo
           id="free-solo-2-demo"
           disableClearable
-          options={products.map((product) => product.name)}
+          options={products.map((product) => product.name )}
           renderInput={(params) => (
-            <TextField onKeyDown={searchProduct}
+            <TextField  onKeyDown={searchProduct}
               {...params}
               label="Search"
               InputProps={{

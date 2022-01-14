@@ -5,10 +5,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 
 const ProductCard = (props) => {
-    const {name, category, price, img} = props.product;
+    const {name, _id, category, price, img} = props.product;
     return (
             
         <div className="col-md-4 d-flex justify-content-center mt-5 align-items-center">
@@ -29,7 +30,9 @@ const ProductCard = (props) => {
                 </CardContent>
                 <CardActions className="d-flex justify-content-around mb-3">
                     <Typography gutterBottom variant="h4" component="div">${price}</Typography>
-                    <Button variant="contained" color="success" size="large"><b>Buy Now</b></Button>
+                    <Link to={`/checkOut/${_id}`}>
+                        <Button variant="contained" color="success" size="large"><b>Buy Now</b></Button>
+                    </Link>
                 </CardActions>
                 </Card>
         </div>

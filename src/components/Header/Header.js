@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../images/mateGadges.png";
 import { Link } from "react-router-dom";
@@ -17,28 +16,25 @@ import { loginContext } from "../../App";
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(loginContext)
   const pages = ["Products", "Pricing", "Blog"];
-  const [anchorElNav, setAnchorElNav] = useState();
-  const [anchorElUser, setAnchorElUser] = useState();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorEl] = React.useState(null);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+
+  const handleUserMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   const handleCloseNavMenu = (param) => {
-    // setAnchorElNav(null);
+    setAnchorEl(null);
     if(param === "signOut"){
-      setLoggedInUser("")
       setAnchorElNav(null);
+      setLoggedInUser("")
     }
   };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
 
 
 
@@ -93,7 +89,7 @@ const Header = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem onClick={handleCloseNavMenu}>
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -172,35 +168,39 @@ const Header = () => {
                 Admin
               </Link>
             </Box>
+                
+            <div>
+              
+            </div>
 
             { loggedInUser.email ? (<Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={loggedInUser.name} src={loggedInUser.img ? loggedInUser.img : loggedInUser.name}/>
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleUserMenu}
+                color="inherit"
+              >
+                <Avatar alt={loggedInUser.name} src={loggedInUser.img ? loggedInUser.img : loggedInUser.name}/>
+              </IconButton>
               <Menu
-                sx={{ mt: "45px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right',
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={handleCloseNavMenu}
               >
-                  <MenuItem sx={{textAlign:"center"}} onClick={handleCloseNavMenu}>
-                    <Typography >{loggedInUser.name}</Typography>
-                  </MenuItem>
-                  <MenuItem sx={{textAlign:"center"}} onClick={() => handleCloseNavMenu("signOut")}>
-                    <Typography>Sign Out</Typography>
-                  </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>{loggedInUser.name}</MenuItem>
+                <MenuItem onClick={() => handleCloseNavMenu("signOut")}>Sign Out</MenuItem>
               </Menu>
             </Box>)
             :
@@ -226,3 +226,4 @@ const Header = () => {
 };
 
 export default Header;
+

@@ -12,7 +12,8 @@ import { loginContext } from "../../App";
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(loginContext);
-    const [signUp, setSignUp] = useState(false)
+    const [signUp, setSignUp] = useState(true)
+    const [signUpMessage, setSignUpMessage] = useState({})
     const [showPass, setShowPass] = useState(false);
     const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm();
     console.log(errors)
@@ -54,13 +55,18 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user, "sign up success")
                     updateUserDetails(data)
+                    console.log(user, "sign up success")
+                    if(user){
+                        setSignUpMessage({message: "Sign Up Successful" , success:true})
+                    }
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
-                    console.log(errorMessage)
+                   if(errorMessage === "Firebase: Error (auth/email-already-in-use)."){
+                    console.log("same email")
+                    setSignUpMessage({message: "This email already in use", success:false})
+                   }
                 });
         }
     }
@@ -91,11 +97,8 @@ const Login = () => {
                     setLoggedInUser(newUser)
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
-
                     console.log(errorMessage, "sign in")
-
                 });
         }
     }
@@ -215,6 +218,7 @@ const Login = () => {
                                             </small>
                                         )}
                                     </div>
+                                    {signUp && <small style={signUpMessage.success? {color:"green"} : {color:"red"}}>{signUpMessage.message}</small>}
                                     {signUp ? <input type="submit" className="btnRegister" value="Sign Up" />
                                         :
                                         <input type="submit" className="btnRegister" value="Sign In" />}

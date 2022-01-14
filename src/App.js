@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Orders from './components/Orders/Orders';
 import Login from './components/Login/Login';
 import NotMatch from './components/NotMatch/NotMatch';
+import CheckOut from './components/CheckOut/CheckOut';
 
 export const loginContext = createContext();
 
@@ -17,6 +18,7 @@ function App() {
       <loginContext.Provider value={[loggedInUser, setLoggedInUser]}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/checkOut/:id" element={<CheckOut />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
