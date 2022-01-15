@@ -24,7 +24,7 @@ const CheckOut = () => {
 
     // place order 
         const placeOrder = () =>{
-            const newOrder = {name: loggedInUser.name, email: loggedInUser.email, product: productId.id, orderTime: new Date()}
+            const newOrder = {userName: loggedInUser.name, userEmail: loggedInUser.email, productId: productId.id, productName: product.name, productPrice: product.price, productImg: product.img, orderTime: new Date()}
             
             fetch("http://localhost:5000/addOrders", {
                 method: "POST",
