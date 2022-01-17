@@ -7,7 +7,6 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
@@ -16,14 +15,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AddProduct from '../AddProduct/AddProduct';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolderPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faFolderPlus, faEdit, faHome } from "@fortawesome/free-solid-svg-icons";
 import { useState, createContext } from 'react';
 import ManageProduct from '../ManageProduct/ManageProduct';
 import EditProduct from '../EditProduct/EditProduct';
 import CloseIcon from '@mui/icons-material/Close';
 import icon from "../../images/mateGadges 1.png"
-import HomeIcon from '@mui/icons-material/Home';
-import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -97,7 +94,7 @@ export const MyContext = createContext();
 export default function Admin() {
   const [open, setOpen] = useState(true);
 
-  const initialState = {manageProduct: true, addProduct: false, editProduct: false}
+  const initialState = { manageProduct: true, addProduct: false, editProduct: false }
   const [selectedComponent, setSelectedComponent] = useState(initialState);
   const [editProductId, setEditProductId] = useState();
   const [successMessage, setSuccessMessage] = useState(true)
@@ -107,9 +104,9 @@ export default function Admin() {
   };
 
 
-  const handleChangeComponent = (componentName) =>{
-    if(componentName === "manageProduct"){
-      const showComponent = {...selectedComponent}
+  const handleChangeComponent = (componentName) => {
+    if (componentName === "manageProduct") {
+      const showComponent = { ...selectedComponent }
       showComponent.manageProduct = true;
       showComponent.addProduct = false;
       showComponent.editProduct = false;
@@ -117,9 +114,9 @@ export default function Admin() {
       setSuccessMessage(false)
     }
 
-    if(componentName === "addProduct"){
+    if (componentName === "addProduct") {
       console.log("object")
-      const showComponent = {...selectedComponent}
+      const showComponent = { ...selectedComponent }
       showComponent.addProduct = true;
       showComponent.manageProduct = false;
       showComponent.editProduct = false;
@@ -127,15 +124,15 @@ export default function Admin() {
       setSuccessMessage(false)
     }
 
-    if(componentName === "editProduct"){
-      const showComponent = {...selectedComponent}
+    if (componentName === "editProduct") {
+      const showComponent = { ...selectedComponent }
       showComponent.editProduct = true;
       showComponent.manageProduct = false;
       showComponent.addProduct = false;
       setSelectedComponent(showComponent)
       setSuccessMessage(false)
     }
-    
+
   }
 
   return (
@@ -152,7 +149,7 @@ export default function Admin() {
               marginRight: '36px',
             }}
           >
-            {open ? <CloseIcon/> : <MenuIcon />}
+            {open ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <Typography variant="h4" noWrap component="div">
             {selectedComponent.manageProduct && "Manage Product"}
@@ -163,42 +160,46 @@ export default function Admin() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <img style={{width:"120px"}} src={icon} alt="" />
+          <img style={{ width: "120px" }} src={icon} alt="" />
         </DrawerHeader>
-        <Divider />
         <List>
-                  <ListItem button onClick={() =>handleChangeComponent("manageProduct")}>
-                  <ListItemIcon>
-                  <AppRegistrationSharpIcon/>
-                  </ListItemIcon>
-                  <ListItemText primary={"Manage Products"} />
-                  </ListItem>
+          <ListItem button onClick={() => handleChangeComponent("manageProduct")}>
+            <ListItemIcon>
+              <AppRegistrationSharpIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Manage Products"} />
+          </ListItem>
 
-                <ListItem button onClick={() =>handleChangeComponent("addProduct")}>
-                <ListItemIcon>
-                <FontAwesomeIcon icon={faFolderPlus} />
-                </ListItemIcon>
-                <ListItemText primary={"Add Product"} />
-                </ListItem>
-            
-                <ListItem button onClick={() =>handleChangeComponent("editProduct")}>
-                <ListItemIcon>
-                <FontAwesomeIcon icon={faEdit} />
-                </ListItemIcon>
-                <ListItemText primary={"Edit Product"} />
-                </ListItem>
+          <ListItem button onClick={() => handleChangeComponent("addProduct")}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faFolderPlus} />
+            </ListItemIcon>
+            <ListItemText primary={"Add Product"} />
+          </ListItem>
+
+          <ListItem button onClick={() => handleChangeComponent("editProduct")}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={faEdit} />
+            </ListItemIcon>
+            <ListItemText primary={"Edit Product"} />
+          </ListItem>
+
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <ListItem button>
+              <ListItemIcon>
+                <FontAwesomeIcon className="text-success" icon={faHome} />
+              </ListItemIcon>
+              <ListItemText className="text-success" primary={"Back to Home"} />
+            </ListItem>
+          </Link>
         </List>
-        <Divider />
-        <Link to="/" > 
-            <Button color="success" className="w-100" variant="outlined"><HomeIcon/>{open &&  "Back to Home"}</Button>
-        </Link>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <MyContext.Provider value={{editProductId, setEditProductId, selectedComponent, setSelectedComponent, successMessage, setSuccessMessage}}>
+        <MyContext.Provider value={{ editProductId, setEditProductId, selectedComponent, setSelectedComponent, successMessage, setSuccessMessage }}>
           <DrawerHeader />
-            {selectedComponent.manageProduct && <ManageProduct/>}
-            {selectedComponent.addProduct && <AddProduct/>}
-            {selectedComponent.editProduct && <EditProduct/>}
+          {selectedComponent.manageProduct && <ManageProduct />}
+          {selectedComponent.addProduct && <AddProduct />}
+          {selectedComponent.editProduct && <EditProduct />}
         </MyContext.Provider>
       </Box>
     </Box>

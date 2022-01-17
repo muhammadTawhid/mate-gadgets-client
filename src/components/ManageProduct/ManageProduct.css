@@ -1,22 +1,24 @@
-.edit-icon{
+.edit-icon {
     background-color: white;
     border: 1px solid green;
     border-radius: 5px;
     padding: 5px 2px 5px 5px;
     margin-right: 5px;
 }
-.edit-icon:hover{
+
+.edit-icon:hover {
     background-color: #28a745;
     color: rgb(255, 255, 255);
 }
 
-.trash-icon{
+.trash-icon {
     background-color: white;
     border: 1px solid #dc3545;
     border-radius: 5px;
     padding: 5px;
 }
-.trash-icon:hover{
+
+.trash-icon:hover {
     background-color: #dc3545;
     color: rgb(255, 255, 255);
 }

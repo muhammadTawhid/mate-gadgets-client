@@ -30,7 +30,7 @@ const Header = () => {
 
   const handleCloseNavMenu = (param) => {
     setAnchorEl(null);
-    if(param === "signOut"){
+    if (param === "signOut") {
       setAnchorElNav(null);
       setLoggedInUser("")
     }
@@ -39,10 +39,10 @@ const Header = () => {
 
 
   const linkStyle = {
-    marginRight:"50px",
-    textDecoration:"none",
-    fontWeight:"700",
-    color:"black"
+    marginRight: "50px",
+    textDecoration: "none",
+    fontWeight: "700",
+    color: "black"
   }
 
   return (
@@ -102,12 +102,12 @@ const Header = () => {
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             >
               <Link to="/">
-                  <img style={{ width: "100px" }} src={logo} alt="" />
+                <img style={{ width: "100px" }} src={logo} alt="" />
               </Link>
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: 'flex-end'} }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: 'flex-end' } }}>
               <Link
-              style={linkStyle}
+                style={linkStyle}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -118,12 +118,12 @@ const Header = () => {
                   display: "block",
                 }}
                 to="/"
-                
+
               >
                 Home
               </Link>
               <Link
-              style={linkStyle}
+                style={linkStyle}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -133,12 +133,12 @@ const Header = () => {
                   display: "block",
                 }}
                 to="/orders"
-                
+
               >
                 Orders
               </Link>
               <Link
-              style={linkStyle}
+                style={linkStyle}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -148,12 +148,12 @@ const Header = () => {
                   display: "block",
                 }}
                 to="/"
-                
+
               >
                 Deals
               </Link>
               <Link
-              style={linkStyle}
+                style={linkStyle}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -163,17 +163,17 @@ const Header = () => {
                   display: "block",
                 }}
                 to="/admin"
-                
+
               >
                 Admin
               </Link>
             </Box>
-                
+
             <div>
-              
+
             </div>
 
-            { loggedInUser.email ? (<Box sx={{ flexGrow: 0 }}>
+            {loggedInUser.email ? (<Box sx={{ flexGrow: 0 }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -182,7 +182,7 @@ const Header = () => {
                 onClick={handleUserMenu}
                 color="inherit"
               >
-                <Avatar alt={loggedInUser.name} src={loggedInUser.img ? loggedInUser.img : loggedInUser.name}/>
+                <Avatar alt={loggedInUser.name} src={loggedInUser.img ? loggedInUser.img : loggedInUser.name} />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -203,9 +203,9 @@ const Header = () => {
                 <MenuItem onClick={() => handleCloseNavMenu("signOut")}>Sign Out</MenuItem>
               </Menu>
             </Box>)
-            :
-            (<Link
-              style={linkStyle}
+              :
+              (<Link
+                style={linkStyle}
                 sx={{
                   my: 5,
                   mr: 10,
@@ -214,7 +214,7 @@ const Header = () => {
                   display: "block",
                 }}
                 to="/login"
-                
+
               >
                 Login
               </Link>)}

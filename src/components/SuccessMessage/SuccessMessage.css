@@ -1,4 +1,4 @@
-.success-div{
+.success-div {
     width: 400px;
     height: 300px;
     background-color: white;
@@ -10,16 +10,19 @@
     text-align: center;
     padding: 20px;
 }
-.icon{
+
+.icon {
     font-size: 70px;
     color: #28a745;
 }
-.success-div h2{
+
+.success-div h2 {
     font-weight: 750;
     margin-top: 20px;
     word-spacing: 5px;
 }
-.success-div button{
+
+.success-div button {
     color: white;
     width: 100%;
     padding: 5px 0px;

@@ -9,7 +9,7 @@ import { MyContext } from "../Admin/Admin";
 
 
 const AddProduct = () => {
-  const {successMessage, setSuccessMessage} = useContext(MyContext);
+  const { successMessage, setSuccessMessage } = useContext(MyContext);
   const [productImg, setProductImg] = useState(null);
   const { register, handleSubmit } = useForm();
 
@@ -26,13 +26,13 @@ const AddProduct = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newProduct),
     })
-    .then(res => res.json())
-    .then((data) => {
-      console.log(data.insertedId)
-      if(data.insertedId){
-        setSuccessMessage(true)
-      }
-    })
+      .then(res => res.json())
+      .then((data) => {
+        console.log(data.insertedId)
+        if (data.insertedId) {
+          setSuccessMessage(true)
+        }
+      })
   };
 
   const uploadImg = (e) => {
@@ -48,77 +48,77 @@ const AddProduct = () => {
   };
   return (
     <div>
-      {successMessage ? (<SuccessMessage/> )
-      :
+      {successMessage ? (<SuccessMessage />)
+        :
         (<div className="addProduct-form">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>Add Product</h2>
-          <div className="form-group">
-            <div className="row mt-5">
-              <div className="col">
-                <label>
-                  <b>Product Name</b>
-                </label>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Name"
-                  required="required"
-                />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <h2>Add Product</h2>
+            <div className="form-group">
+              <div className="row mt-5">
+                <div className="col">
+                  <label>
+                    <b>Product Name</b>
+                  </label>
+                  <input
+                    {...register("name", { required: true })}
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Name"
+                    required="required"
+                  />
+                </div>
+                <div className="col">
+                  <label>
+                    <b>Product Price</b>
+                  </label>
+                  <input
+                    {...register("price", { required: true })}
+                    type="number"
+                    className="form-control"
+                    placeholder="Enter Price"
+                    required="required"
+                  />
+                </div>
               </div>
-              <div className="col">
-                <label>
-                  <b>Product Price</b>
-                </label>
-                <input
-                  {...register("price", { required: true })}
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Price"
-                  required="required"
-                />
-              </div>
-            </div>
 
-            <div className="row mt-5">
-              <div className="col">
-                <label>
-                  <b>Category</b>
-                </label>
-                <input
-                  {...register("category", { required: true })}
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Category"
-                  required="required"
-                />
-              </div>
-              <div className="col">
-                <p>
-                  <b>Add Photo</b>
-                </p>
-                <label id="upload-pic-btn" htmlFor="pic-upload">
-                  <FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />
-                  <b>Upload Photo</b>
-                </label>
-                <input
-                  onChange={uploadImg}
-                  hidden
-                  id="pic-upload"
-                  type="file"
-                  className="form-control"
-                  placeholder="Upload Pic"
-                  required="required"
-                />
+              <div className="row mt-5">
+                <div className="col">
+                  <label>
+                    <b>Category</b>
+                  </label>
+                  <input
+                    {...register("category", { required: true })}
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Category"
+                    required="required"
+                  />
+                </div>
+                <div className="col">
+                  <p>
+                    <b>Add Photo</b>
+                  </p>
+                  <label id="upload-pic-btn" htmlFor="pic-upload">
+                    <FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />
+                    <b>Upload Photo</b>
+                  </label>
+                  <input
+                    onChange={uploadImg}
+                    hidden
+                    id="pic-upload"
+                    type="file"
+                    className="form-control"
+                    placeholder="Upload Pic"
+                    required="required"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <button id="add-product-btn" type="submit">
-            Add Product
-          </button>
-        </form>
-      </div>)}
+            <button id="add-product-btn" type="submit">
+              Add Product
+            </button>
+          </form>
+        </div>)}
     </div>
   );
 };

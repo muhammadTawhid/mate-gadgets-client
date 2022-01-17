@@ -1,6 +1,7 @@
 import "./Login.css"
-import React, { useContext, useRef, useState } from 'react';
 import Header from '../Header/Header';
+import React, { useContext, useRef, useState } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons'
@@ -11,9 +12,14 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, up
 import { loginContext } from "../../App";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: "/" } };
+
     const [loggedInUser, setLoggedInUser] = useContext(loginContext);
-    const [signUp, setSignUp] = useState(true)
-    const [signUpMessage, setSignUpMessage] = useState({})
+    const [signUp, setSignUp] = useState(true);
+    const [signUpMessage, setSignUpMessage] = useState({});
+    const [signInMessage, setSignInMessage] = useState({});
     const [showPass, setShowPass] = useState(false);
     const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm();
     console.log(errors)
@@ -38,12 +44,15 @@ const Login = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
-                const newUser = {...loggedInUser}
+                const newUser = { ...loggedInUser }
                 newUser.name = user.displayName;
                 newUser.email = user.email;
                 newUser.img = user.photoURL;
                 setLoggedInUser(newUser)
-            }).catch((error) => {
+                getIdToken();
+                navigate.replace(from);
+            })
+            .catch((error) => {
                 console.log(error);
             });
     }
@@ -57,29 +66,28 @@ const Login = () => {
                     const user = userCredential.user;
                     updateUserDetails(data)
                     console.log(user, "sign up success")
-                    if(user){
-                        setSignUpMessage({message: "Sign Up Successful" , success:true})
+                    if (user) {
+                        setSignUpMessage({ message: "Sign Up Successful", success: true })
                     }
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
-                   if(errorMessage === "Firebase: Error (auth/email-already-in-use)."){
-                    console.log("same email")
-                    setSignUpMessage({message: "This email already in use", success:false})
-                   }
+                    if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
+                        console.log("same email")
+                        setSignUpMessage({ message: "This email already in use", success: false })
+                    }
                 });
         }
     }
 
     // update user
-    const updateUserDetails = (data) =>{
+    const updateUserDetails = (data) => {
         updateProfile(auth.currentUser, {
-        displayName: data.firstName,
+            displayName: data.firstName,
         }).then((result) => {
             console.log(result);
         }).catch((error) => {
-        // An error occurred
-        // ...
+            console.log(error);
         });
     }
 
@@ -91,17 +99,42 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user, "sign in success")
-                    const newUser = {...loggedInUser}
+                    const newUser = { ...loggedInUser }
                     newUser.name = user.displayName;
                     newUser.email = user.email;
                     setLoggedInUser(newUser)
+                    getIdToken();
+                    if (user) {
+                        setSignInMessage({ message: "Sign In Successful", success: true })
+                    }
+                    navigate.replace(from);
                 })
                 .catch((error) => {
-                    const errorMessage = error.message;
-                    console.log(errorMessage, "sign in")
+                    console.log(error)
+                    console.log(error.message)
+                    if (error.message === "Firebase: Error (auth/wrong-password).") {
+                        setSignInMessage({ message: "Invalid email or password", success: false })
+                    }
+                    if (error.message === "Firebase: Error (auth/network-request-failed).") {
+                        setSignInMessage({ message: "Something went to wrong check your internet connection and try again", success: false })
+                    }
                 });
         }
     }
+
+    // verify id token
+    const getIdToken = () => {
+        console.log("im calling")
+        auth.currentUser.getIdToken(true)
+            .then(function (idToken) {
+                sessionStorage.setItem("token", idToken)
+                console.log(idToken)
+            }).catch(function (error) {
+                console.log(error)
+            });
+
+    }
+
     return (
         <div>
             <Header />
@@ -131,15 +164,15 @@ const Login = () => {
                                         <input
                                             style={errors.firstName && { borderBottom: "1px solid red" }}
                                             {...register("firstName", {
-                                              required: "This field is required",
-                                              pattern: {
-                                                value: /^[A-Z]/,
-                                                message: "First letter should be uppercase",
-                                              },
-                                              maxLength: {
-                                                value: 20,
-                                                message: "Name contains only 20 characters",
-                                              },
+                                                required: "This field is required",
+                                                pattern: {
+                                                    value: /^[A-Z]/,
+                                                    message: "First letter should be uppercase",
+                                                },
+                                                maxLength: {
+                                                    value: 20,
+                                                    message: "Name contains only 20 characters",
+                                                },
                                             })}
                                             onKeyUp={() => trigger("firstName")}
                                             required
@@ -218,7 +251,8 @@ const Login = () => {
                                             </small>
                                         )}
                                     </div>
-                                    {signUp && <small style={signUpMessage.success? {color:"green"} : {color:"red"}}>{signUpMessage.message}</small>}
+                                    {signUp && <small style={signUpMessage.success ? { color: "green" } : { color: "red" }}>{signUpMessage.message}</small>}
+                                    {signUp === false && <small style={signInMessage.success ? { color: "green" } : { color: "red" }}>{signInMessage.message}</small>}
                                     {signUp ? <input type="submit" className="btnRegister" value="Sign Up" />
                                         :
                                         <input type="submit" className="btnRegister" value="Sign In" />}

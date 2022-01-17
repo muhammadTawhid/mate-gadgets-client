@@ -1,18 +1,21 @@
-.register{
+.register {
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
     padding: 3%;
     width: 650px;
     padding: 50px;
 }
-.register-left{
+
+.register-left {
     text-align: center;
     color: #fff;
     margin-top: 4%;
 }
-.register-left div{
+
+.register-left div {
     margin-top: 30%;
 }
-.register-left button{
+
+.register-left button {
     border: none;
     border-radius: 1.5rem;
     padding: 5px 10px;
@@ -23,38 +26,55 @@
     margin-top: 3%;
     cursor: pointer;
 }
-.register-right{
+
+.register-right {
     background: #f8f9fa;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
     width: 73% !important;
     height: 450px;
 }
-.register-left img{
+
+.register-left img {
     margin-top: 15%;
     margin-bottom: 5%;
     width: 25%;
-    -webkit-animation: mover 2s infinite  alternate;
-    animation: mover 1s infinite  alternate;
+    -webkit-animation: mover 2s infinite alternate;
+    animation: mover 1s infinite alternate;
 }
+
 @-webkit-keyframes mover {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
 }
+
 @keyframes mover {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
 }
-.register-left p{
+
+.register-left p {
     font-weight: lighter;
     padding: 12%;
     margin-top: -9%;
 }
-.register .register-form{
+
+.register .register-form {
     padding: 12%;
     margin-top: 10%;
 }
-.btnRegister{
+
+.btnRegister {
     float: right;
     margin-top: 5%;
     border: none;
@@ -66,14 +86,16 @@
     width: 50%;
     cursor: pointer;
 }
-.register-heading{
+
+.register-heading {
     text-align: center;
     margin-top: 7%;
     margin-bottom: -18%;
     color: #495057;
     font-weight: 700;
 }
-.toggle-btn-div{
+
+.toggle-btn-div {
     border-radius: 30px;
     width: 200px !important;
     position: absolute;
@@ -82,7 +104,8 @@
     padding: 2px 20px;
     background-color: #0062cc;
 }
-.signUp-active, .signIn-active{
+
+.signUp-active, .signIn-active {
     border: none;
     padding: 2px 20px;
     border-radius: 20px;
@@ -90,17 +113,20 @@
     font-weight: 700;
     color: #0062cc;
 }
-.signUp, .signIn{
+
+.signUp, .signIn {
     color: white;
     font-weight: 700;
     border: none;
     background-color: transparent;
 }
-.eye-btn{
+
+.eye-btn {
     background-color: transparent;
     border: none;
     margin-left: -30px;
 }
-.err-message{
+
+.err-message {
     color: red;
 }

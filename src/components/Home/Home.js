@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import ProductCard from '../ProductCard/ProductCard';
-import CircularProgress from '@mui/material/CircularProgress';
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
+import Spinner from '../Spinner/Spinner';
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
-    console.log(products);
-    useEffect(() => {
-        fetch("http://localhost:5000/products")
+  const [products, setProducts] = useState([]);
+  console.log(products);
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+  }, [])
+
+  const searchProduct = e => {
+    console.log(e.target.value);
+    if (e.key === "Enter") {
+      fetch(`http://localhost:5000/product/${e.target.value}`)
         .then(res => res.json())
         .then(data => setProducts(data))
-    }, [])
-
-    const searchProduct = e =>{
-        console.log(e.target.value);
-        if(e.key === "Enter"){
-            fetch(`http://localhost:5000/product/${e.target.value}`)
-            .then(res => res.json())
-            .then(data => setProducts(data))
-        }
     }
+  }
 
-    return (
-        <div className='container'>
-            <Header/>
-            <Stack
+  return (
+    <div className='container'>
+      <Header />
+      <Stack
         spacing={2}
         sx={{ width: 500, justifyContent: "center", my: 0, mx: "auto" }}
       >
@@ -35,9 +35,9 @@ const Home = () => {
           freeSolo
           id="free-solo-2-demo"
           disableClearable
-          options={products.map((product) => product.name )}
+          options={products.map((product) => product.name)}
           renderInput={(params) => (
-            <TextField  onKeyDown={searchProduct}
+            <TextField onKeyUp={searchProduct}
               {...params}
               label="Search"
               InputProps={{
@@ -48,15 +48,15 @@ const Home = () => {
           )}
         />
       </Stack>
-      {/* <CircularProgress color="success" />  */}
-           <div className="row mt-5">
-           {
-                products.map(product => <ProductCard product={product} key={product._id}/>)
-            }
-           </div>
+      {products.length === 0 && <Spinner />}
+      <div className="row mt-5">
+        {
+          products.map(product => <ProductCard product={product} key={product._id} />)
+        }
+      </div>
 
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Home;

@@ -6,11 +6,13 @@ import Orders from './components/Orders/Orders';
 import Login from './components/Login/Login';
 import NotMatch from './components/NotMatch/NotMatch';
 import CheckOut from './components/CheckOut/CheckOut';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import PrivetRoute from './components/PrivetRoute/PrivetRoute';
 
 export const loginContext = createContext();
 
 function App() {
-  const user = {name:"", email:"", img:""}
+  const user = { name: "", email: "", img: "", }
   const [loggedInUser, setLoggedInUser] = useState(user)
   console.log(loggedInUser)
   return (
@@ -18,9 +20,9 @@ function App() {
       <loginContext.Provider value={[loggedInUser, setLoggedInUser]}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/checkOut/:id" element={<CheckOut />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/checkOut/:id" element={<PrivetRoute><CheckOut /></PrivetRoute>} />
+          <Route path="/orders" element={<PrivetRoute><Orders /></PrivetRoute>} />
+          <Route path="/admin" element={<PrivetRoute><Admin /></PrivetRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<NotMatch />} />
         </Routes>
