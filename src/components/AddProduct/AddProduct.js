@@ -20,7 +20,7 @@ const AddProduct = () => {
       category: data.category,
       img: productImg,
     };
-    fetch("http://localhost:5000/addProduct", {
+    fetch("https://mate-gadgets.herokuapp.com/addProduct", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newProduct),

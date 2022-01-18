@@ -10,19 +10,19 @@ import Footer from '../Footer/Footer';
 const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://mate-gadgets.herokuapp.com/products")
       .then(res => res.json())
       .then(data => setProducts(data))
   }, [])
 
   const searchProduct = e => {
     if(e.target.value === "" || e.key === "Enter"){
-      fetch("http://localhost:5000/products")
+      fetch("https://mate-gadgets.herokuapp.com/products")
       .then(res => res.json())
       .then(data => setProducts(data))
     }
     if (e.target.value && e.key === "Enter") {
-      fetch(`http://localhost:5000/product/${e.target.value}`)
+      fetch(`https://mate-gadgets.herokuapp.com/product/${e.target.value}`)
         .then(res => res.json())
         .then(data => setProducts(data))
     }

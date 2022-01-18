@@ -8,7 +8,7 @@ const OrdersCard = (props) => {
 
     const handleRemoveOrder = (orderId) => {
         setLoggedInUser({ ...loggedInUser, reload: true })
-        fetch("http://localhost:5000/order/" + orderId, {
+        fetch("https://mate-gadgets.herokuapp.com/order/" + orderId, {
             method: "DELETE"
         })
             .then(res => console.log(res))
