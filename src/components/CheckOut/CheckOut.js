@@ -13,8 +13,6 @@ const CheckOut = () => {
     const [product, setProduct] = useState({});
     const [orderSuccess, setOrderSuccess] = useState(false)
     const productId = useParams();
-    console.log(product)
-    console.log(productId.id)
 
     //load product by id
     useEffect(() => {
@@ -82,7 +80,7 @@ const CheckOut = () => {
                         </tfoot>
                     </table>
                     <div className="text-end">
-                        <Button onClick={placeOrder} className="my-3" variant="contained" color="success" size="large"><b>Place Order</b></Button>
+                        <Button style={{ textTransform: "none" }} onClick={placeOrder} className="my-3" variant="contained" color="success" size="large"><b>Place Order</b></Button>
                     </div>
                 </div>}
         </div>

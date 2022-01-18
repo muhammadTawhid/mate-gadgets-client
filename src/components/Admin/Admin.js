@@ -98,7 +98,6 @@ export default function Admin() {
   const [selectedComponent, setSelectedComponent] = useState(initialState);
   const [editProductId, setEditProductId] = useState();
   const [successMessage, setSuccessMessage] = useState(true)
-  console.log(selectedComponent)
   const handleDrawer = () => {
     setOpen(!open);
   };
@@ -115,7 +114,6 @@ export default function Admin() {
     }
 
     if (componentName === "addProduct") {
-      console.log("object")
       const showComponent = { ...selectedComponent }
       showComponent.addProduct = true;
       showComponent.manageProduct = false;

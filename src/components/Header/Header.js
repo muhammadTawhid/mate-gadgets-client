@@ -15,7 +15,6 @@ import { loginContext } from "../../App";
 
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(loginContext)
-  const pages = ["Products", "Pricing", "Blog"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorEl] = React.useState(null);
 
@@ -88,11 +87,79 @@ const Header = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem>
+                  <Link
+                    style={linkStyle}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      ml: "auto",
+                      mr: 5,
+                      fontWeight: "bold",
+                      color: "black",
+                      display: "block",
+                    }}
+                    to="/"
+
+                  >
+                    Home
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                    style={linkStyle}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      ml: "auto",
+                      mr: 5,
+                      fontWeight: "bold",
+                      color: "black",
+                      display: "block",
+                    }}
+                    to="/orders"
+
+                  >
+                    Orders
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                    style={linkStyle}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      ml: "auto",
+                      mr: 5,
+                      fontWeight: "bold",
+                      color: "black",
+                      display: "block",
+                    }}
+                    to="/"
+
+                  >
+                    Deals
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                    style={linkStyle}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      ml: "auto",
+                      mr: 5,
+                      fontWeight: "bold",
+                      color: "black",
+                      display: "block",
+                    }}
+                    to="/admin"
+
+                  >
+                    Admin
+                  </Link>
+                </MenuItem>
+
               </Menu>
             </Box>
             <Typography

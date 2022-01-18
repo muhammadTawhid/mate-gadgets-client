@@ -11,9 +11,7 @@ import { MyContext } from "../Admin/Admin";
 const EditProduct = (props) => {
   const { editProductId, successMessage, setSuccessMessage } = useContext(MyContext);
   const [editProduct, setEditProduct] = useState({});
-  console.log(editProductId, "get product");
   const [productImg, setProductImg] = useState(null);
-  console.log(productImg, "img");
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
@@ -31,7 +29,6 @@ const EditProduct = (props) => {
       category: data.category,
       img: productImg ? productImg : editProduct.img,
     };
-    console.log(newProduct);
 
     fetch("http://localhost:5000/editProduct/" + editProductId, {
       method: "PATCH",
@@ -49,7 +46,6 @@ const EditProduct = (props) => {
   };
 
   const uploadImg = (e) => {
-    console.log(e.target.files[0]);
     const newImgData = new FormData();
     newImgData.set("key", "be8a4cc0a70c10d0afc35bcd7b9def3d");
     newImgData.append("image", e.target.files[0]);

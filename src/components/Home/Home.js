@@ -5,10 +5,10 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import Spinner from '../Spinner/Spinner';
+import Footer from '../Footer/Footer';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  console.log(products);
   useEffect(() => {
     fetch("http://localhost:5000/products")
       .then(res => res.json())
@@ -16,8 +16,12 @@ const Home = () => {
   }, [])
 
   const searchProduct = e => {
-    console.log(e.target.value);
-    if (e.key === "Enter") {
+    if(e.target.value === "" || e.key === "Enter"){
+      fetch("http://localhost:5000/products")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+    }
+    if (e.target.value && e.key === "Enter") {
       fetch(`http://localhost:5000/product/${e.target.value}`)
         .then(res => res.json())
         .then(data => setProducts(data))
@@ -27,9 +31,9 @@ const Home = () => {
   return (
     <div className='container'>
       <Header />
-      <Stack
+      <Stack className="col-md-5"
         spacing={2}
-        sx={{ width: 500, justifyContent: "center", my: 0, mx: "auto" }}
+        sx={{ justifyContent: "center", my: 0, mx: "auto" }}
       >
         <Autocomplete
           freeSolo
@@ -54,7 +58,7 @@ const Home = () => {
           products.map(product => <ProductCard product={product} key={product._id} />)
         }
       </div>
-
+        <Footer/>
     </div>
   );
 };

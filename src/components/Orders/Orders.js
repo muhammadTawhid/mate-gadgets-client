@@ -7,7 +7,6 @@ import Spinner from '../Spinner/Spinner';
 const Orders = () => {
     const [loggedInUser] = useContext(loginContext);
     const [orders, setOrders] = useState([]);
-    console.log(orders, "orders");
 
     useEffect(() => {
         fetch("http://localhost:5000/orders?email=" + loggedInUser.email, {
@@ -28,11 +27,9 @@ const Orders = () => {
         const myNumber = parseInt(myString)
         priceArray.push(myNumber)
     }
-    console.log(priceArray, "price array")
     const total = priceArray.reduce(function (a, b) {
         return a + b;
     }, 0);
-    console.log(total);
 
     return (
         <div>

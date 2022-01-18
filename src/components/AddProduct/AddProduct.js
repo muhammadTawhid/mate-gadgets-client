@@ -20,7 +20,6 @@ const AddProduct = () => {
       category: data.category,
       img: productImg,
     };
-    console.log(newProduct);
     fetch("http://localhost:5000/addProduct", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -28,7 +27,6 @@ const AddProduct = () => {
     })
       .then(res => res.json())
       .then((data) => {
-        console.log(data.insertedId)
         if (data.insertedId) {
           setSuccessMessage(true)
         }
@@ -36,7 +34,6 @@ const AddProduct = () => {
   };
 
   const uploadImg = (e) => {
-    console.log(e.target.files[0]);
     const newImgData = new FormData();
     newImgData.set("key", "be8a4cc0a70c10d0afc35bcd7b9def3d");
     newImgData.append("image", e.target.files[0]);

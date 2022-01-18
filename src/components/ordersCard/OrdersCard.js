@@ -12,7 +12,6 @@ const OrdersCard = (props) => {
             method: "DELETE"
         })
             .then(res => console.log(res))
-        console.log(orderId)
     }
 
     return (
@@ -28,7 +27,7 @@ const OrdersCard = (props) => {
                         <small className="text-muted">order submitted: {(new Date(orderTime)).toDateString("dd/MM/yyyy")}</small>
                         <br />
                         <small className="text-muted">order placed by: {userEmail}</small>
-                        <Button onClick={() => handleRemoveOrder(_id)} className="my-3" variant="contained" color="success" size="large"><b>Remove from order list</b></Button>
+                        <Button onClick={() => handleRemoveOrder(_id)} className="my-3" variant="contained" color="success" size="large" style={{ textTransform: "none" }}><b>Remove from order list</b></Button>
                     </div>
                 </div>
             </div>

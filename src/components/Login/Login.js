@@ -8,7 +8,7 @@ import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 import { useForm } from "react-hook-form";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebase.config";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { loginContext } from "../../App";
 
 const Login = () => {
@@ -22,11 +22,9 @@ const Login = () => {
     const [signInMessage, setSignInMessage] = useState({});
     const [showPass, setShowPass] = useState(false);
     const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm();
-    console.log(errors)
     const password = useRef({});
     password.current = watch("password");
     const onSubmit = data => {
-        console.log(data)
         if (signUp) {
             handleSignUp(data)
         }
@@ -38,9 +36,9 @@ const Login = () => {
     // sign in with google
     initializeApp(firebaseConfig);
     const auth = getAuth();
-    const provider = new GoogleAuthProvider();
 
     const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
@@ -57,6 +55,26 @@ const Login = () => {
             });
     }
 
+    // sign in with facebook
+    const handleFacebookSignIn = () => {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            const newUser = { ...loggedInUser }
+                newUser.name = user.displayName;
+                newUser.email = user.email;
+                newUser.img = user.photoURL;
+                setLoggedInUser(newUser)
+                getIdToken();
+                navigate.replace(from);
+        })
+        .catch((error) => {
+            console.log(error, "error")
+        });
+
+    }
+
     // sign up with email and password
     const handleSignUp = (data) => {
         if (data.firstName && data.lastName && data.email && data.password) {
@@ -65,7 +83,6 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     updateUserDetails(data)
-                    console.log(user, "sign up success")
                     if (user) {
                         setSignUpMessage({ message: "Sign Up Successful", success: true })
                     }
@@ -73,7 +90,6 @@ const Login = () => {
                 .catch((error) => {
                     const errorMessage = error.message;
                     if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
-                        console.log("same email")
                         setSignUpMessage({ message: "This email already in use", success: false })
                     }
                 });
@@ -98,7 +114,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user, "sign in success")
                     const newUser = { ...loggedInUser }
                     newUser.name = user.displayName;
                     newUser.email = user.email;
@@ -110,8 +125,6 @@ const Login = () => {
                     navigate.replace(from);
                 })
                 .catch((error) => {
-                    console.log(error)
-                    console.log(error.message)
                     if (error.message === "Firebase: Error (auth/wrong-password).") {
                         setSignInMessage({ message: "Invalid email or password", success: false })
                     }
@@ -124,11 +137,9 @@ const Login = () => {
 
     // verify id token
     const getIdToken = () => {
-        console.log("im calling")
         auth.currentUser.getIdToken(true)
             .then(function (idToken) {
                 sessionStorage.setItem("token", idToken)
-                console.log(idToken)
             }).catch(function (error) {
                 console.log(error)
             });
@@ -145,7 +156,7 @@ const Login = () => {
                         <h3>Welcome</h3>
                         <p>{signUp ? "Please, Sign up and make your life easy with our gadgets" : "Submit your login details to continue"} </p>
                         <div>
-                            <button><FontAwesomeIcon icon={faFacebookF} /> Continue with facebook</button>
+                            <button onClick={handleFacebookSignIn}><FontAwesomeIcon icon={faFacebookF} /> Continue with facebook</button>
                             <button onClick={handleGoogleSignIn}><FontAwesomeIcon icon={faGoogle} /> Continue with google</button>
                         </div>
                     </div>

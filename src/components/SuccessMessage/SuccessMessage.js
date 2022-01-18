@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 
 const SuccessMessage = (props) => {
     const { setSuccessMessage, selectedComponent } = useContext(MyContext)
-    console.log(selectedComponent, "selected component sucess message");
     return (
         <div>
             {selectedComponent.editProduct && <Alert severity="success" onClose={() => setSuccessMessage(false)}>
