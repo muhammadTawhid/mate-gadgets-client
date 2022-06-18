@@ -26,7 +26,7 @@ const ProductCard = (props) => {
                 </CardContent>
                 <CardActions className="d-flex justify-content-around mb-3">
                     <Typography gutterBottom variant="h4" component="div">${price}</Typography>
-                    <Link to={`/checkOut/${_id}`}>
+                    <Link to={`/checkOut/${_id}`} style={{ textDecoration: "none" }}>
                         <Button variant="contained" color="success" size="large"><b>Buy Now</b></Button>
                     </Link>
                 </CardActions>

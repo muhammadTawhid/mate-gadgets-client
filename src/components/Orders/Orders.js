@@ -13,7 +13,7 @@ const Orders = () => {
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                "authorization": sessionStorage.getItem("token")
+                "authorization": localStorage.getItem("loggedInUserToken")
             }
         })
             .then(res => res.json())

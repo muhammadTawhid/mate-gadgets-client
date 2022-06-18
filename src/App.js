@@ -8,13 +8,26 @@ import NotMatch from './components/NotMatch/NotMatch';
 import CheckOut from './components/CheckOut/CheckOut';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import PrivetRoute from './components/PrivetRoute/PrivetRoute';
+import { useEffect } from 'react';
 
 export const loginContext = createContext();
 
 function App() {
-  const user = { name: "", email: "", img: "", }
+  const user = { name: "", email: "", img: "" }
   const [loggedInUser, setLoggedInUser] = useState(user)
   console.log(loggedInUser)
+
+  const newLoggedInUser = localStorage.getItem("newLoggedInUser");
+
+  useEffect(() => {
+    if (newLoggedInUser) {
+      setLoggedInUser(JSON.parse(newLoggedInUser))
+    }
+    else {
+      setLoggedInUser({ name: "", email: "", img: "" })
+    }
+  }, [])
+
   return (
     <div>
       <loginContext.Provider value={[loggedInUser, setLoggedInUser]}>

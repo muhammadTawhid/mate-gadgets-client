@@ -1,3 +1,4 @@
+import './Header.css';
 import React, { useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -16,8 +17,8 @@ import { loginContext } from "../../App";
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(loginContext)
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorEl] = React.useState(null);
-
+  const [anchorElUser, setAnchorEl] = useState(null);
+  const localStorageItems = ["newLoggedInUser", "loggedInUserToken"];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,10 +33,9 @@ const Header = () => {
     if (param === "signOut") {
       setAnchorElNav(null);
       setLoggedInUser("")
+      localStorageItems.forEach(items => localStorage.removeItem(items))
     }
   };
-
-
 
   const linkStyle = {
     marginRight: "50px",

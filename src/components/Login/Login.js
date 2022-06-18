@@ -38,7 +38,7 @@ const Login = () => {
     const auth = getAuth();
 
     const handleGoogleSignIn = () => {
-    const provider = new GoogleAuthProvider();
+        const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
@@ -48,6 +48,7 @@ const Login = () => {
                 newUser.img = user.photoURL;
                 setLoggedInUser(newUser)
                 getIdToken();
+                handleSetNewLoggedInUser(newUser);
                 navigate.replace(from);
             })
             .catch((error) => {
@@ -59,19 +60,20 @@ const Login = () => {
     const handleFacebookSignIn = () => {
         const provider = new FacebookAuthProvider();
         signInWithPopup(auth, provider)
-        .then((result) => {
-            const user = result.user;
-            const newUser = { ...loggedInUser }
+            .then((result) => {
+                const user = result.user;
+                const newUser = { ...loggedInUser }
                 newUser.name = user.displayName;
                 newUser.email = user.email;
                 newUser.img = user.photoURL;
                 setLoggedInUser(newUser)
                 getIdToken();
+                handleSetNewLoggedInUser(newUser);
                 navigate.replace(from);
-        })
-        .catch((error) => {
-            console.log(error, "error")
-        });
+            })
+            .catch((error) => {
+                console.log(error, "error")
+            });
 
     }
 
@@ -122,6 +124,7 @@ const Login = () => {
                     if (user) {
                         setSignInMessage({ message: "Sign In Successful", success: true })
                     }
+                    handleSetNewLoggedInUser(newUser);
                     navigate.replace(from);
                 })
                 .catch((error) => {
@@ -139,11 +142,16 @@ const Login = () => {
     const getIdToken = () => {
         auth.currentUser.getIdToken(true)
             .then(function (idToken) {
-                sessionStorage.setItem("token", idToken)
+                localStorage.setItem("loggedInUserToken", idToken)
             }).catch(function (error) {
                 console.log(error)
             });
 
+    }
+
+    // storing state to local storage
+    const handleSetNewLoggedInUser = (newLoggedInUser) => {
+        localStorage.setItem("newLoggedInUser", JSON.stringify(newLoggedInUser))
     }
 
     return (
