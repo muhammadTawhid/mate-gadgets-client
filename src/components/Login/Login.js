@@ -50,7 +50,9 @@ const Login = () => {
                 setLoggedInUser(newUser)
                 getIdToken();
                 handleSetNewLoggedInUser(newUser);
-                navigate.replace(from);
+                if (newUser) {
+                    navigate.replace(from);
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -70,7 +72,9 @@ const Login = () => {
                 setLoggedInUser(newUser)
                 getIdToken();
                 handleSetNewLoggedInUser(newUser);
-                navigate.replace(from);
+                if (newUser) {
+                    navigate.replace(from);
+                }
             })
             .catch((error) => {
                 console.log(error, "error")
@@ -126,7 +130,9 @@ const Login = () => {
                         setSignInMessage({ message: "Sign In Successful", success: true })
                     }
                     handleSetNewLoggedInUser(newUser);
-                    navigate.replace(from);
+                    if (newUser) {
+                        navigate.replace(from);
+                    }
                 })
                 .catch((error) => {
                     if (error.message === "Firebase: Error (auth/wrong-password).") {
