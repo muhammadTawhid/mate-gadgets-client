@@ -33,7 +33,7 @@
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
     width: 73% !important;
-    height: 450px;
+    /* height: 450px; */
 }
 
 .register-left img {
@@ -75,6 +75,10 @@
     margin-top: 10%;
 }
 
+.register-form input {
+    margin-top: 10px;
+}
+
 .btnRegister {
     float: right;
     margin-top: 5%;
@@ -90,8 +94,8 @@
 
 .register-heading {
     text-align: center;
-    margin-top: 7%;
-    margin-bottom: -18%;
+    /* margin-top: 7%; */
+    /* margin-bottom: -18%; */
     color: #495057;
     font-weight: 700;
 }
@@ -99,10 +103,10 @@
 .toggle-btn-div {
     border-radius: 30px;
     width: 200px !important;
-    position: absolute;
-    right: 2%;
-    top: 3%;
-    padding: 2px 20px;
+    /* position: absolute; */
+    /* right: 2%; */
+    /* top: 3%; */
+    padding: 2px 5px;
     background-color: #0062cc;
 }
 
@@ -126,6 +130,7 @@
     background-color: transparent;
     border: none;
     margin-left: -30px;
+    margin-top: 10px;
 }
 
 .err-message {
@@ -142,7 +147,7 @@
 
     .register-heading {
         width: 80%;
-        margin: 23% auto 0px !important;
+        margin: 8% auto 0px !important;
         font-size: 1.5em;
     }
 
@@ -154,21 +159,31 @@
         margin-top: 0;
     }
 
+    .register-left p {
+        font-weight: 400;
+        margin-top: 0;
+        padding: 0;
+    }
+
     .register-right {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+        border-radius: 10px;
         width: 90% !important;
         margin: 2em auto;
     }
 
     .register-form {
-        padding: 10% 5% !important;
+        padding: 2% 5% 10% !important;
         margin-top: 0 !important;
     }
 
     .toggle-btn-div {
-        /* margin: 0 auto !important; */
-        right: 17%;
+        margin: 1em auto 0 !important;
+    }
+
+    .btnRegister{
+        float: left;
     }
 }
 
@@ -182,4 +197,21 @@
 @media (min-width: 991.98px) and (max-width: 1199.98px) {}
 
 /* X-Large devices (large desktops, less than 1400px) */
-@media (min-width: 991.98px) and (max-width: 1399.98px), (min-width: 1399.98px) and (max-width: 2000px) {}
+@media (min-width: 1199.98px) and (max-width: 2000px) {
+    .register-right {
+        height: 450px;
+    }
+
+    .toggle-btn-div {
+        display: absolute;
+        right: 2%;
+        top: 3%;
+        /* border: 1px solid red; */
+        margin-left: auto;
+        margin-top: 1em !important;
+        margin-right: 1em!important;
+        /* margin-left: auto; */
+        /* margin: 0 auto; */
+        /* right: 17%; */
+    }
+}

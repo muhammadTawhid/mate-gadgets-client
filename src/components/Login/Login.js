@@ -21,6 +21,7 @@ const Login = () => {
     const [signUpMessage, setSignUpMessage] = useState({});
     const [signInMessage, setSignInMessage] = useState({});
     const [showPass, setShowPass] = useState(false);
+    const [showConfirmPass, setShowConfirmPass] = useState(false);
     const { register, handleSubmit, trigger, watch, formState: { errors } } = useForm();
     const password = useRef({});
     password.current = watch("password");
@@ -194,12 +195,12 @@ const Login = () => {
                                                 },
                                             })}
                                             onKeyUp={() => trigger("firstName")}
-                                            required
                                             type="text" className="form-control" placeholder="First Name *" />
                                         {errors.firstName && <small className="err-message">{errors.firstName?.message}</small>}
                                     </div>}
                                     {signUp && <div className="form-group">
                                         <input
+                                            style={errors.lastName && { borderBottom: "1px solid red" }}
                                             {...register("lastName", { required: true })}
                                             type="text" className="form-control" placeholder="Last Name *" />
                                         {errors.lastName && <small className="err-message">This field is required</small>}
@@ -216,7 +217,6 @@ const Login = () => {
                                                 },
                                             })}
                                             onKeyUp={() => trigger("email")}
-                                            required
                                             type="email" className="form-control" placeholder="Your Email *" />
                                         {errors.email && (
                                             <small className="err-message">{errors.email?.message}</small>
@@ -238,7 +238,6 @@ const Login = () => {
                                                     },
                                                 })}
                                                 onKeyUp={() => trigger("password")}
-                                                required
                                                 type={showPass ? "text" : "password"} className="form-control" placeholder="Password *" />
                                             <span className="d-flex align-items-center">
                                                 <button onClick={() => setShowPass(!showPass)} className="eye-btn">{showPass ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}</button>
@@ -258,10 +257,9 @@ const Login = () => {
                                                         value === password.current || "This password don't match",
                                                 })}
                                                 onKeyUp={() => trigger("confirmPassword")}
-                                                required
-                                                type={showPass ? "text" : "password"} className="form-control" placeholder="Confirm Password *" />
+                                                type={showConfirmPass ? "text" : "password"} className="form-control" placeholder="Confirm Password *" />
                                             <span className="d-flex align-items-center">
-                                                <button onClick={() => setShowPass(!showPass)} className="eye-btn">{showPass ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}</button>
+                                                <button onClick={() => setShowConfirmPass(!showConfirmPass)} className="eye-btn">{showConfirmPass ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}</button>
                                             </span>
                                         </div>
                                         {errors.confirmPassword && (
@@ -272,9 +270,13 @@ const Login = () => {
                                     </div>
                                     {signUp && <small style={signUpMessage.success ? { color: "green" } : { color: "red" }}>{signUpMessage.message}</small>}
                                     {signUp === false && <small style={signInMessage.success ? { color: "green" } : { color: "red" }}>{signInMessage.message}</small>}
-                                    {signUp ? <input type="submit" className="btnRegister" value="Sign Up" />
-                                        :
-                                        <input type="submit" className="btnRegister" value="Sign In" />}
+                                    <div>
+                                        {signUp ?
+                                            <input type="submit" className="btnRegister" value="Sign Up" />
+                                            :
+                                            <input type="submit" className="btnRegister" value="Sign In" />
+                                        }
+                                    </div>
                                 </div>
                             </form>
                         </div>
