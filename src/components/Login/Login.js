@@ -15,6 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
+    console.log(from, "location")
 
     const [loggedInUser, setLoggedInUser] = useContext(loginContext);
     const [signUp, setSignUp] = useState(true);
@@ -171,12 +172,12 @@ const Login = () => {
                         <h3>Welcome</h3>
                         <p>{signUp ? "Please, Sign up and make your life easy with our gadgets" : "Submit your login details to continue"} </p>
                         <div>
+                            <button onClick={handleGoogleSignIn}>
+                                <FontAwesomeIcon icon={faGoogle} /> Continue with google
+                            </button>
                             <button onClick={handleFacebookSignIn}>
                                 <FontAwesomeIcon icon={faFacebookF} />
                                 Continue with facebook
-                            </button>
-                            <button onClick={handleGoogleSignIn}>
-                                <FontAwesomeIcon icon={faGoogle} /> Continue with google
                             </button>
                         </div>
                     </div>

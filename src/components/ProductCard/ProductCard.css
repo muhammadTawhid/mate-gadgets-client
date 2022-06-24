@@ -1,0 +1,28 @@
+.product-card {
+    width: 300px;
+    height: 400px;
+}
+
+.product-card img {
+    width: 200px;
+}
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (min-width: 300.98px) and (max-width: 575.98px) {
+    .product-card {
+        width: 90%;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 575.98px) and (max-width: 991.98px) {
+    .product-card-container {
+        max-width: 95% !important;
+    }
+
+    .product-card .MuiTypography-h5 {
+        font-size: 25px;
+        height: 63.66px;
+        overflow: hidden;
+    }
+}

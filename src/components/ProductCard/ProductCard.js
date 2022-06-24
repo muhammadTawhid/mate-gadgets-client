@@ -1,3 +1,4 @@
+import './ProductCard.css';
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,10 +12,10 @@ const ProductCard = (props) => {
     const { name, _id, category, price, img } = props.product;
     return (
 
-        <div className="col-md-4 d-flex justify-content-center mt-5 align-items-center">
-            <Card sx={{ width: 300, height: 400, boxShadow: 5, border: 0 }}>
+        <div className="col-sm-6 col-md-6 col-lg-4 d-flex justify-content-center mt-5 align-items-center">
+            <Card sx={{ boxShadow: 5, border: 0 }} className="product-card">
                 <div className="text-center">
-                    <img style={{ width: "200px" }} src={img} alt="" />
+                    <img src={img} alt="" />
                 </div>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

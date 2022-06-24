@@ -29,7 +29,7 @@ const Home = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container product-card-container'>
       <Header />
       <Stack className="col-md-5"
         spacing={2}

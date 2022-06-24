@@ -35,11 +35,15 @@ const Orders = () => {
         <div>
             <Header />
             <h3 className="text-center my-3"><b>{loggedInUser.email ? "Hello" : "Sorry"} {loggedInUser.name}, <br /> {orders.length > 0 ? `You have ${orders.length} orders on pending` : `You have no orders yet! :(`}</b></h3>
-            <div className="row d-flex justify-content-evenly w-100">
-                {
-                    orders.map(order => <OrdersCard order={order} key={order._id} />)
-                }
-                {orders.length > 0 ? <div className="border mt-4 w-75">
+            <div className="">
+                <div className="container">
+                    <div className="row d-flex justify-content-evenly">
+                        {
+                            orders.map(order => <OrdersCard order={order} key={order._id} />)
+                        }
+                    </div>
+                </div>
+                {orders.length > 0 ? <div className="border mt-4 w-75 mx-auto">
                     <h5 className="text-center text-secondary"><strong>Order Details</strong></h5>
                     <table className="table table-borderless">
                         <thead>
