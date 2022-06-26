@@ -19,6 +19,7 @@
 }
 
 .addProduct-form form {
+    position: relative;
     height: 400px;
     color: rgb(0, 0, 0);
     border-radius: 3px;

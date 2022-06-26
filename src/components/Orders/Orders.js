@@ -4,6 +4,20 @@ import Header from '../Header/Header';
 import OrdersCard from '../ordersCard/OrdersCard';
 import Spinner from '../Spinner/Spinner';
 
+// const staticOrders = [
+//     {
+//         _id: "61e32bd74524823a9fa012c1",
+//         userName: "Sanjid Hasan",
+//         userEmail: "hasansanjid93@gmail.com",
+//         productId: "61d2bdf204cb1f1eb3bf2cd8",
+//         productName: "Hp h100 gaming headset with mic",
+//         productPrice: "248",
+//         productImg: "https://i.ibb.co/yWn4mbm/hp-h100-gaming-headset-with-mic.jpg",
+//         orderTime: "2022-01-15T20:17:27.084Z"
+//     },
+
+// ]
+
 const Orders = () => {
     const [loggedInUser] = useContext(loginContext);
     const [orders, setOrders] = useState([]);
@@ -34,18 +48,18 @@ const Orders = () => {
     return (
         <div>
             <Header />
-            <h3 className="text-center my-3"><b>{loggedInUser.email ? "Hello" : "Sorry"} {loggedInUser.name}, <br /> {orders.length > 0 ? `You have ${orders.length} orders on pending` : `You have no orders yet! :(`}</b></h3>
+            <h3 className="text-center my-3 orders-header"><b>{loggedInUser.email ? "Hello" : "Sorry"} {loggedInUser.name}, <br /> {orders.length > 0 ? `You have ${orders.length} orders on pending` : `You have no orders yet! :(`}</b></h3>
             <div className="">
-                <div className="container">
+                <div className="container orders-container">
                     <div className="row d-flex justify-content-evenly">
                         {
                             orders.map(order => <OrdersCard order={order} key={order._id} />)
                         }
                     </div>
                 </div>
-                {orders.length > 0 ? <div className="border mt-4 w-75 mx-auto">
+                {orders.length > 0 ? <div className="border mt-4 w-75 mx-auto" style={{ overflowX: "scroll" }}>
                     <h5 className="text-center text-secondary"><strong>Order Details</strong></h5>
-                    <table className="table table-borderless">
+                    <table className="table table-borderless overflow-x:auto">
                         <thead>
                             <tr>
                                 <th></th>

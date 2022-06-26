@@ -16,13 +16,14 @@ const OrdersCard = (props) => {
     }
 
     return (
-        <div className="col-sm-12 col-md-6 col-lg-6">
-            <div className="ordersCard mb-3 align-items-center border- shadow">
-                <div className="row align-items-cente g-0">
-                    <div className="col-md-4">
+
+        <div className="col-sm-12 col-md-6">
+            <div className="card ordersCard mb-3 border- shadow">
+                <div className="row orders-row-div align-items-center g-0">
+                    <div className="col-sm-4 col-md-4 text-center">
                         <img src={productImg} className="img-fluid rounded-start" alt="..." />
                     </div>
-                    <div className="col-md-8 ms-3">
+                    <div className="col-sm-8 col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">{productName}</h5>
                             <p className="card-text mb-0">Price: ${productPrice}</p>
@@ -35,7 +36,6 @@ const OrdersCard = (props) => {
                 </div>
             </div>
         </div>
-
 
         // <div className="card mb-3 align-items-center border-0 shadow">
         //     <div className="row g-0">

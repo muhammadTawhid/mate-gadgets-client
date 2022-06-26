@@ -52,7 +52,7 @@ const CheckOut = () => {
                 <Button onClick={() => setOrderSuccess(false)} variant="contained" color="success" size="large"><b>OK</b></Button>
             </div>
                 :
-                <div className="container shadow mt-5">
+                <div className="container shadow mt-5 checkout-div">
                     <table className="table table-hover">
                         <thead>
                             <tr>
@@ -62,7 +62,7 @@ const CheckOut = () => {
                                 <th>Price</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                             <tr>
                                 <td><img style={{ width: "50px" }} src={product.img} alt="" /></td>
                                 <td>{product.name}</td>

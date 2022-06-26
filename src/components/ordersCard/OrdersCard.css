@@ -1,40 +1,86 @@
 .ordersCard {
-    /* width: 500px; */
-    padding: 0 20px;
-    border: 1px solid;
-    height: 260px;
-    /* vertical-align: middle; */
-    /* align-items: center; */
-    /* display: flex; */
-    margin: auto 0;
-
+    padding: 0 1em;
 }
-.ordersCard img{
-    border: 1px solid;
-}
-
 
 /* X-Small devices (portrait phones, less than 576px) */
 @media (min-width: 300.98px) and (max-width: 575.98px) {
+    .ordersCard {
+        width: 90%;
+        margin: 0 auto;
+    }
 
-}  
+    .orders-header {
+        font-size: 22px;
+    }
 
-    /* Small devices (landscape phones, less than 768px) */
+    .ordersCard img {
+        width: 200px;
+        margin: 0 auto !important;
+    }
+
+    .checkout-div {
+        width: 92% !important;
+        overflow-x: scroll !important;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 575px) {
+    .card-body {
+        width: 90% !important;
+        margin: 0 auto;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
 @media (min-width: 575.98px) and (max-width: 767.98px) {
+    .orders-container {
+        max-width: 100% !important;
+    }
 
+    .ordersCard {
+        width: 90%;
+        margin: 0 auto;
+    }
 }
 
-    /* Medium devices (tablets, less than 992px) */
+/* Medium devices (tablets, less than 992px) */
 @media (min-width: 767.98px) and (max-width: 991.98px) {
+    .orders-container {
+        max-width: 90% !important;
+    }
 
+    .ordersCard {
+        height: 458px;
+    }
+
+    .ordersCard img {
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .card-body {
+        width: 90% !important;
+        margin: 0 auto;
+    }
+
+    .orders-row-div {
+        display: inline !important;
+    }
+
+    .orders-row-div div {
+        width: 100%;
+    }
 }
 
-    /* Large devices (desktops, less than 1200px) */
+/* Large devices (desktops, less than 1200px) */
 @media (min-width: 991.98px) and (max-width: 1199.98px) {
-
+    .orders-container {
+        max-width: 90% !important;
+    }
 }
 
-    /* X-Large devices (large desktops, less than 1400px) */
-@media (min-width: 991.98px) and (max-width: 1399.98px), (min-width: 1399.98px) and (max-width: 2000px) {
-
+@media (min-width: 991.98px) and (max-width: 2000px) {
+    .ordersCard {
+        height: 258px;
+    }
 }
