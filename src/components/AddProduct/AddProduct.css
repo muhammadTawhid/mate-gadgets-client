@@ -9,6 +9,7 @@
     margin: 0 auto;
     padding: 0px 0;
     font-size: 15px;
+    overflow-x: scroll !important;
 }
 
 .addProduct-form h2 {
@@ -78,3 +79,46 @@
     position: absolute;
     right: 13%;
 }
+
+/* @media (min-width: 300.98px) and (max-width: 767.98px) {
+    .addProduct-form {
+        width: 100%;
+        position: absolute;
+        z-index: -1;
+        margin-top: .6em;
+        border: 1px solid red;
+    }
+
+    .addProduct-form h2 {
+        font-size: 35px;
+        margin-bottom: 1.5em;
+    }
+
+    .addProduct-form form {
+        width: 100%;
+        margin: auto 0;
+    }
+
+    .addProduct-form input, .addProduct-form textarea, #upload-thumbnail-btn {
+        width: 100%;
+    }
+
+    .addProduct-form {
+        width: 90%;
+        height: 570px;
+        margin: 0 auto;
+    }
+
+    .addProduct-form h6 {
+        font-size: 16px;
+        margin-top: 2em;
+    }
+
+    .textarea-label {
+        margin-top: 2em;
+    }
+
+    .addProduct-form img {
+        display: none;
+    }
+} */

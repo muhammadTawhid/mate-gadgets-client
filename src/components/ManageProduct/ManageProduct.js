@@ -48,7 +48,7 @@ const ManageProduct = () => {
           {products.length === 0 && <Spinner />}
           {products.map((product, index) => (
             <tr key={product._id}>
-              {selectedComponent.editProduct ? (<th><img className="w-25" src={product.img} alt="" /></th>) : <th scope="row" >{index + 1}</th>}
+              {selectedComponent.editProduct ? (<th><img className="product-img" src={product.img} alt="" /></th>) : <th scope="row" >{index + 1}</th>}
 
               <td>{product.name}</td>
               <td>{product.category}</td>

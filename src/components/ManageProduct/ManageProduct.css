@@ -22,3 +22,36 @@
     background-color: #dc3545;
     color: rgb(255, 255, 255);
 }
+
+.product-img {
+    width: 80px;
+}
+
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (min-width: 300.98px) and (max-width: 575.98px) {
+    .table {
+        width: 500px !important;
+        overflow-x: scroll !important;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 575.98px) and (max-width: 767.98px) {
+    .product-img {
+        /* width: 80px; */
+    }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 767.98px) and (max-width: 991.98px) {
+    .product-img {
+        /* width: 80px; */
+    }
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (min-width: 991.98px) and (max-width: 1199.98px) {}
+
+/* X-Large devices (large desktops, less than 1400px) */
+@media (min-width: 991.98px) and (max-width: 1399.98px), (min-width: 1399.98px) and (max-width: 2000px) {}

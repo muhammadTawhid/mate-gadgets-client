@@ -158,7 +158,7 @@ export default function Admin() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <img style={{ width: "120px" }} src={icon} alt="" />
+          <img style={{ width: "120px", margin:"0 auto" }} src={icon} alt="" />
         </DrawerHeader>
         <List>
           <ListItem button onClick={() => handleChangeComponent("manageProduct")}>

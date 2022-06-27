@@ -11,6 +11,7 @@ import { MyContext } from "../Admin/Admin";
 const AddProduct = () => {
   const { successMessage, setSuccessMessage } = useContext(MyContext);
   const [productImg, setProductImg] = useState(null);
+  const [imgUploading, setImgUploading] = useState(false)
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -34,13 +35,16 @@ const AddProduct = () => {
   };
 
   const uploadImg = (e) => {
+    setImgUploading(true)
     const newImgData = new FormData();
     newImgData.set("key", "be8a4cc0a70c10d0afc35bcd7b9def3d");
     newImgData.append("image", e.target.files[0]);
 
     axios.post("https://api.imgbb.com/1/upload", newImgData).then((res) => {
       setProductImg(res.data.data.display_url);
-      console.log(res.data.data.display_url);
+      if (res.data.data.display_url) {
+        setImgUploading(false);
+      }
     });
   };
   return (
@@ -96,8 +100,7 @@ const AddProduct = () => {
                     <b>Add Photo</b>
                   </p>
                   <label id="upload-pic-btn" htmlFor="pic-upload">
-                    <FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />
-                    <b>Upload Photo</b>
+                    {imgUploading ? <b><span  style={{width:"15px", height:"15px"}} className="spinner-border"></span> Uploading...</b> : <b><FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />Upload Photo</b>}
                   </label>
                   <input
                     onChange={uploadImg}
