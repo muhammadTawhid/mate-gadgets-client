@@ -5,7 +5,7 @@
 }
 
 .addProduct-form {
-    width: 70em;
+    /* width: 70em; */
     margin: 0 auto;
     padding: 0px 0;
     font-size: 15px;
@@ -79,6 +79,64 @@
     position: absolute;
     right: 13%;
 }
+
+/*  */
+.second-row {
+    margin-top: 3em !important;
+}
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (min-width: 300.98px) and (max-width: 575.98px) {
+    .addProduct-form {
+        width: 100% !important;
+    }
+
+    .addProduct-form form {
+        border: 1px solid green;
+        padding: 20px !important;
+        width: 100% !important;
+        height: 550px !important;
+    }
+
+    .addProduct-form .col {
+        flex: auto;
+    }
+
+    .addProduct-form label {
+        margin-top: 1em;
+    }
+
+    .addProduct-form input {
+        width: 100% !important;
+    }
+
+    #upload-pic-btn {
+        margin-top: 0;
+    }
+
+    .second-row {
+        margin-top: 0 !important;
+    }
+
+    .addProduct-form p {
+        margin-top: 1em;
+    }
+    #add-product-btn{
+        margin: 0 auto !important;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 575.98px) and (max-width: 767.98px) {}
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 767.98px) and (max-width: 991.98px) {}
+
+/* Large devices (desktops, less than 1200px) */
+@media (min-width: 991.98px) and (max-width: 1199.98px) {}
+
+/* X-Large devices (large desktops, less than 1400px) */
+@media (min-width: 991.98px) and (max-width: 1399.98px), (min-width: 1399.98px) and (max-width: 2000px) {}
 
 /* @media (min-width: 300.98px) and (max-width: 767.98px) {
     .addProduct-form {

@@ -31,8 +31,8 @@
 /* X-Small devices (portrait phones, less than 576px) */
 @media (min-width: 300.98px) and (max-width: 575.98px) {
     .table {
-        width: 500px !important;
-        overflow-x: scroll !important;
+        /* width: 500px !important; */
+        /* overflow-x: scroll !important; */
     }
 }
 

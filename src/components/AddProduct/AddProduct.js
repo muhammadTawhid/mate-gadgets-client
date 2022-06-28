@@ -82,7 +82,7 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              <div className="row mt-5">
+              <div className="row mt- second-row">
                 <div className="col">
                   <label>
                     <b>Category</b>
