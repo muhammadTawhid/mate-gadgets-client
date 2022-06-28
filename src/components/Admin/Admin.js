@@ -1,3 +1,4 @@
+import './Admin.css';
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -192,7 +193,7 @@ export default function Admin() {
           </Link>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3}} className="sidebar-component-part">
         <MyContext.Provider value={{ editProductId, setEditProductId, selectedComponent, setSelectedComponent, successMessage, setSuccessMessage }}>
           <DrawerHeader />
           {selectedComponent.manageProduct && <ManageProduct />}

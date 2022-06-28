@@ -9,7 +9,7 @@
     margin: 0 auto;
     padding: 0px 0;
     font-size: 15px;
-    overflow-x: scroll !important;
+    /* overflow-x: scroll !important; */
 }
 
 .addProduct-form h2 {
