@@ -55,7 +55,7 @@ const AddProduct = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <h2>Add Product</h2>
             <div className="form-group">
-              <div className="row mt-5">
+              <div className="row first-row">
                 <div className="col">
                   <label>
                     <b>Product Name</b>
@@ -82,7 +82,7 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              <div className="row mt- second-row">
+              <div className="row second-row">
                 <div className="col">
                   <label>
                     <b>Category</b>
@@ -100,7 +100,7 @@ const AddProduct = () => {
                     <b>Add Photo</b>
                   </p>
                   <label id="upload-pic-btn" htmlFor="pic-upload">
-                    {imgUploading ? <b><span  style={{width:"15px", height:"15px"}} className="spinner-border"></span> Uploading...</b> : <b><FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />Upload Photo</b>}
+                    {imgUploading ? <b><span style={{ width: "15px", height: "15px" }} className="spinner-border"></span> Uploading...</b> : <b><FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />Upload Photo</b>}
                   </label>
                   <input
                     onChange={uploadImg}
@@ -114,9 +114,11 @@ const AddProduct = () => {
                 </div>
               </div>
             </div>
-            <button id="add-product-btn" type="submit">
-              Add Product
-            </button>
+            <div className="add-product-btn-div">
+              <button id="add-product-btn" type="submit">
+                Add Product
+              </button>
+            </div>
           </form>
         </div>)}
     </div>

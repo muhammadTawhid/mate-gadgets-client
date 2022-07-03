@@ -95,7 +95,7 @@ export const MyContext = createContext();
 export default function Admin() {
   const [open, setOpen] = useState(true);
 
-  const initialState = { manageProduct: true, addProduct: false, editProduct: false }
+  const initialState = { manageProduct: false, addProduct: true, editProduct: false }
   const [selectedComponent, setSelectedComponent] = useState(initialState);
   const [editProductId, setEditProductId] = useState();
   const [successMessage, setSuccessMessage] = useState(true)

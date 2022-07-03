@@ -5,11 +5,9 @@
 }
 
 .addProduct-form {
-    /* width: 70em; */
     margin: 0 auto;
     padding: 0px 0;
     font-size: 15px;
-    /* overflow-x: scroll !important; */
 }
 
 .addProduct-form h2 {
@@ -17,10 +15,11 @@
     font-weight: 700;
     margin: 0 0 15px;
     text-align: center;
+    font-size: 40px;
 }
 
 .addProduct-form form {
-    position: relative;
+    /* position: relative; */
     height: 400px;
     color: rgb(0, 0, 0);
     border-radius: 3px;
@@ -70,32 +69,36 @@
 #add-product-btn:hover {
     border: 2px solid #1b5e20;
     background-color: white;
-    text-align: end;
-    margin-bottom: 20px;
-    padding: 10px 20px;
+    /* text-align: end; */
+    /* margin-bottom: 20px; */
+    /* padding: 10px 20px; */
     color: rgb(0, 0, 0);
-    font-weight: 700;
-    border-radius: 5px;
-    position: absolute;
-    right: 13%;
+    /* font-weight: 700; */
+    /* border-radius: 5px; */
+    /* position: absolute; */
+    /* right: 13%; */
 }
 
 /*  */
-.second-row {
+.first-row, .second-row {
     margin-top: 3em !important;
 }
 
 /* X-Small devices (portrait phones, less than 576px) */
-@media (min-width: 300.98px) and (max-width: 575.98px) {
+@media (min-width: 300.98px) and (max-width: 767.98px) {
     .addProduct-form {
         width: 100% !important;
     }
 
+    .addProduct-form h2{
+        font-size: 30px;
+    }
+
     .addProduct-form form {
-        border: 1px solid green;
-        padding: 20px !important;
-        width: 100% !important;
-        height: 550px !important;
+        /* border: 1px solid green; */
+        padding: 20px;
+        /* width: 100% !important; */
+        height: 530px;
     }
 
     .addProduct-form .col {
@@ -107,27 +110,42 @@
     }
 
     .addProduct-form input {
-        width: 100% !important;
+        /* width: 100%; */
     }
 
     #upload-pic-btn {
         margin-top: 0;
     }
 
-    .second-row {
+    .first-row, .second-row {
         margin-top: 0 !important;
     }
 
     .addProduct-form p {
         margin-top: 1em;
     }
+
     #add-product-btn{
-        margin: 0 auto !important;
+        /* margin: 0 auto !important; */
+        /* right: 50%; */
+        margin-top: 20px;
+        margin-bottom: 0;
+        position: static;
+    }
+    .add-product-btn-div{
+        /* margin: 0 auto ; */
+        /* border: 1px solid red; */
+        /* width: 200px; */
+        text-align: center;
     }
 }
 
 /* Small devices (landscape phones, less than 768px) */
-@media (min-width: 575.98px) and (max-width: 767.98px) {}
+@media (min-width: 575.98px) and (max-width: 767.98px) {
+    .addProduct-form h2{
+        font-size: 35px;
+    }
+}
 
 /* Medium devices (tablets, less than 992px) */
 @media (min-width: 767.98px) and (max-width: 991.98px) {}

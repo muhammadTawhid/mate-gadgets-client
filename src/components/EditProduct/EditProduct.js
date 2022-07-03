@@ -73,7 +73,7 @@ const EditProduct = (props) => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <h2>Edit Product</h2>
                 <div className="form-group">
-                  <div className="row mt-5">
+                  <div className="row first-row">
                     <div className="col">
                       <label>
                         <b>Product Name</b>
@@ -100,7 +100,7 @@ const EditProduct = (props) => {
                     </div>
                   </div>
 
-                  <div className="row mt-5">
+                  <div className="row second-row">
                     <div className="col">
                       <label>
                         <b>Category</b>

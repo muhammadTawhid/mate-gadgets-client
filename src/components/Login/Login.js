@@ -1,4 +1,4 @@
-import "./Login.css"
+import "./Login.css";
 import Header from '../Header/Header';
 import React, { useContext, useRef, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
@@ -14,7 +14,7 @@ import { loginContext } from "../../App";
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { from } = location.state || { from: { pathname: "/" } };
+    const { from } = location.state || { from: { pathname: "/orders" } };
     console.log(from, "location")
 
     const [loggedInUser, setLoggedInUser] = useContext(loginContext);
