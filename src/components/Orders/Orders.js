@@ -4,20 +4,6 @@ import Header from '../Header/Header';
 import OrdersCard from '../ordersCard/OrdersCard';
 import Spinner from '../Spinner/Spinner';
 
-// const staticOrders = [
-//     {
-//         _id: "61e32bd74524823a9fa012c1",
-//         userName: "Sanjid Hasan",
-//         userEmail: "hasansanjid93@gmail.com",
-//         productId: "61d2bdf204cb1f1eb3bf2cd8",
-//         productName: "Hp h100 gaming headset with mic",
-//         productPrice: "248",
-//         productImg: "https://i.ibb.co/yWn4mbm/hp-h100-gaming-headset-with-mic.jpg",
-//         orderTime: "2022-01-15T20:17:27.084Z"
-//     },
-
-// ]
-
 const Orders = () => {
     const [loggedInUser] = useContext(loginContext);
     const [orders, setOrders] = useState([]);

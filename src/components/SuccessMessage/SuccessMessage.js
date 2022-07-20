@@ -7,7 +7,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import { MyContext } from "../Admin/Admin";
 import Button from '@mui/material/Button';
 
-const SuccessMessage = (props) => {
+const SuccessMessage = () => {
     const { setSuccessMessage, selectedComponent } = useContext(MyContext)
     return (
         <div>

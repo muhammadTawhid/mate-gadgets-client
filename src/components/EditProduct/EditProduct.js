@@ -1,4 +1,3 @@
-import "./EditProduct.css"
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -55,7 +54,7 @@ const EditProduct = (props) => {
     axios.post("https://api.imgbb.com/1/upload", newImgData)
       .then((res) => {
         setProductImg(res.data.data.display_url);
-        if(res.data.data.display_url){
+        if (res.data.data.display_url) {
           setImgUploading(false)
         }
       });
@@ -118,7 +117,7 @@ const EditProduct = (props) => {
                         <b>Add Photo</b>
                       </p>
                       <label id="upload-pic-btn" htmlFor="pic-upload">
-                      {imgUploading ? <b><span  style={{width:"15px", height:"15px"}} className="spinner-border"></span> Uploading...</b> : <b><FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />Upload Photo</b>}
+                        {imgUploading ? <b><span style={{ width: "15px", height: "15px" }} className="spinner-border"></span> Uploading...</b> : <b><FontAwesomeIcon icon={faCloudUploadAlt} className="me-2" />Upload Photo</b>}
                       </label>
                       <input
                         onChange={uploadImg}

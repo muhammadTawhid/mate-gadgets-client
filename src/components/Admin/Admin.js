@@ -98,7 +98,7 @@ export default function Admin() {
   const initialState = { manageProduct: false, addProduct: true, editProduct: false }
   const [selectedComponent, setSelectedComponent] = useState(initialState);
   const [editProductId, setEditProductId] = useState();
-  const [successMessage, setSuccessMessage] = useState(true)
+  const [successMessage, setSuccessMessage] = useState(false)
   const handleDrawer = () => {
     setOpen(!open);
   };
@@ -159,7 +159,7 @@ export default function Admin() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <img style={{ width: "120px", margin:"0 auto" }} src={icon} alt="" />
+          <img style={{ width: "120px", margin: "0 auto" }} src={icon} alt="" />
         </DrawerHeader>
         <List>
           <ListItem button onClick={() => handleChangeComponent("manageProduct")}>
@@ -193,7 +193,7 @@ export default function Admin() {
           </Link>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3}} className="sidebar-component-part">
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }} className="sidebar-component-part">
         <MyContext.Provider value={{ editProductId, setEditProductId, selectedComponent, setSelectedComponent, successMessage, setSuccessMessage }}>
           <DrawerHeader />
           {selectedComponent.manageProduct && <ManageProduct />}

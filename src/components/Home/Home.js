@@ -16,10 +16,10 @@ const Home = () => {
   }, [])
 
   const searchProduct = e => {
-    if(e.target.value === "" || e.key === "Enter"){
+    if (e.target.value === "" || e.key === "Enter") {
       fetch("https://mate-gadgets.herokuapp.com/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
+        .then(res => res.json())
+        .then(data => setProducts(data))
     }
     if (e.target.value && e.key === "Enter") {
       fetch(`https://mate-gadgets.herokuapp.com/product/${e.target.value}`)
@@ -58,7 +58,7 @@ const Home = () => {
           products.map(product => <ProductCard product={product} key={product._id} />)
         }
       </div>
-        <Footer/>
+      <Footer />
     </div>
   );
 };
