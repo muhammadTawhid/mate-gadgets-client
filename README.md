@@ -1,27 +1,22 @@
 
-# Digital Dudes
-A responsive full-stack single-page web application for a digital agency service provider is called **Digital Dudes**.
-
-
+# Mate Gadgets
+ **Mate Gadgets** is a responsive full-stack e-commerce web application.
 ## Overview
-
-![App Screenshot](https://raw.githubusercontent.com/muhammadTawhid/digital-dudes/main/src/images/digital-dudes-new%20(3).png)
-
-
+![App Screenshot](https://raw.githubusercontent.com/muhammadTawhid/mate-gadgets-client/main/src/images/Mate-Gadgets-New-01.jpeg)
 ## About & Features
-
-- A full-stack single-page responsive web application with firebase authentication.
+- A full-stack responsive e-commerce web application with firebase authentication.
 - Implemented CURD operations with MongoDB through NodeJs.
-- Admin can add, edit, update, and delete services from the administrative panel, as well as add additional admins as sub-ordinary admin and manage subscribed users.
-- The user can add reviews and purchase the monthly plan using a credit card and cancel it at any moment.
+- Admin can add, edit, update, and delete product from the administrative panel.
+- Users can place orders and manage their order lists, which are validated by firebase id token.
 
 ## Front-end Technology:
- - React 
- - React-Router-Dom
- - React Hook Form
- - Firebase Authentication 
- - Bootstrap, Stripe, Swiper
 
+ - React 
+ - Material-UI
+ - React Hook Form
+ - React Router Dom
+ - Firebase Authentication 
+ 
 ## Back-end Technology:
  - Node
  - Express
@@ -29,6 +24,6 @@ A responsive full-stack single-page web application for a digital agency service
 
 
 ## 🔗 Links
-### `Live Link`  https://digital-dudes-agency.web.app
+### `Live Link`  https://mate-gadgets.web.app
 
-###  [Back-end Repository](https://github.com/muhammadTawhid/digital-dudes-server)
+###  [Back-end Repository](https://github.com/muhammadTawhid/mate-gadgets-server)
