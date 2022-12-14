@@ -9,7 +9,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch("https://mate-gadgets.herokuapp.com/orders?email=" + loggedInUser.email, {
+        fetch("https://mate-gadgets.onrender.com/orders?email=" + loggedInUser.email, {
             method: "GET",
             headers: {
                 "content-type": "application/json",

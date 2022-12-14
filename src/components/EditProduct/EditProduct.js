@@ -16,7 +16,7 @@ const EditProduct = (props) => {
 
   useEffect(() => {
     if (editProductId) {
-      fetch("https://mate-gadgets.herokuapp.com/productById/" + editProductId)
+      fetch("https://mate-gadgets.onrender.com/productById/" + editProductId)
         .then(res => res.json())
         .then(data => setEditProduct(data))
     }
@@ -30,7 +30,7 @@ const EditProduct = (props) => {
       img: productImg ? productImg : editProduct.img,
     };
 
-    fetch("https://mate-gadgets.herokuapp.com/editProduct/" + editProductId, {
+    fetch("https://mate-gadgets.onrender.com/editProduct/" + editProductId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"

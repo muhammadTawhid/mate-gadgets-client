@@ -16,7 +16,7 @@ const CheckOut = () => {
 
     //load product by id
     useEffect(() => {
-        fetch("https://mate-gadgets.herokuapp.com/productById/" + productId.id)
+        fetch("https://mate-gadgets.onrender.com/productById/" + productId.id)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [productId])
@@ -25,7 +25,7 @@ const CheckOut = () => {
     const placeOrder = () => {
         const newOrder = { userName: loggedInUser.name, userEmail: loggedInUser.email, productId: productId.id, productName: product.name, productPrice: product.price, productImg: product.img, orderTime: new Date() }
 
-        fetch("https://mate-gadgets.herokuapp.com/addOrders", {
+        fetch("https://mate-gadgets.onrender.com/addOrders", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newOrder)

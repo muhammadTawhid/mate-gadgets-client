@@ -21,7 +21,7 @@ const AddProduct = () => {
       category: data.category,
       img: productImg,
     };
-    fetch("https://mate-gadgets.herokuapp.com/addProduct", {
+    fetch("https://mate-gadgets.onrender.com/addProduct", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newProduct),
